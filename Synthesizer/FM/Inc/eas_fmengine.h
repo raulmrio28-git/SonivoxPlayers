@@ -38,7 +38,7 @@
 
 /* output level to mix buffer (3 = -24dB) */
 #define FM_GAIN_SHIFT 3
-#define FM_MONO_GAIN_SHIFT 9
+#define FM_MONO_GAIN_SHIFT 7
 
 /* voice output level for stereo 15 = +6dB */
 #define FM_STEREO_PRE_GAIN_SHIFT 11
