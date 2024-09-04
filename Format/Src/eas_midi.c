@@ -207,7 +207,7 @@ EAS_RESULT EAS_ParseMIDIStream (S_EAS_DATA *pEASData, S_SYNTH *pSynth, S_MIDI_ST
     }
 
     /* no status byte received, provide a warning, but we should be able to recover */
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Received MIDI data without a valid status byte: %d\n",c); */ }
+    { EAS_Report(_EAS_SEVERITY_WARNING, "Received MIDI data without a valid status byte: %d\n",c); }
     pMIDIStream->pending = EAS_FALSE;
     return EAS_SUCCESS;
 }
@@ -237,8 +237,8 @@ static EAS_RESULT ProcessMIDIMessage (S_EAS_DATA *pEASData, S_SYNTH *pSynth, S_M
     switch (pMIDIStream->status & 0xf0)
     {
     case 0x80:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"NoteOff: %02x %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"NoteOff: %02x %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
         if (parserMode <= eParserModeMute)
             VMStopNote(pEASData->pVoiceMgr, pSynth, channel, pMIDIStream->d1, pMIDIStream->d2);
         break;
@@ -246,29 +246,29 @@ static EAS_RESULT ProcessMIDIMessage (S_EAS_DATA *pEASData, S_SYNTH *pSynth, S_M
     case 0x90:
         if (pMIDIStream->d2)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"NoteOn: %02x %02x %02x\n",
-                pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL,"NoteOn: %02x %02x %02x\n",
+                pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
             pMIDIStream->flags |= MIDI_FLAG_FIRST_NOTE;
             if (parserMode == eParserModePlay)
                 VMStartNote(pEASData->pVoiceMgr, pSynth, channel, pMIDIStream->d1, pMIDIStream->d2);
         }
         else
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"NoteOff: %02x %02x %02x\n",
-                pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL,"NoteOff: %02x %02x %02x\n",
+                pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
             if (parserMode <= eParserModeMute)
                 VMStopNote(pEASData->pVoiceMgr, pSynth, channel, pMIDIStream->d1, pMIDIStream->d2);
         }
         break;
 
     case 0xa0:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"PolyPres: %02x %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"PolyPres: %02x %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
         break;
 
     case 0xb0:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"Control: %02x %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"Control: %02x %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
         if (parserMode <= eParserModeMute)
             VMControlChange(pEASData->pVoiceMgr, pSynth, channel, pMIDIStream->d1, pMIDIStream->d2);
 #ifdef JET_INTERFACE
@@ -281,29 +281,29 @@ static EAS_RESULT ProcessMIDIMessage (S_EAS_DATA *pEASData, S_SYNTH *pSynth, S_M
         break;
 
     case 0xc0:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"Program: %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"Program: %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1); }
         if (parserMode <= eParserModeMute)
             VMProgramChange(pEASData->pVoiceMgr, pSynth, channel, pMIDIStream->d1);
         break;
 
     case 0xd0:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"ChanPres: %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"ChanPres: %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1); }
         if (parserMode <= eParserModeMute)
             VMChannelPressure(pSynth, channel, pMIDIStream->d1);
         break;
 
     case 0xe0:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"PBend: %02x %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"PBend: %02x %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
         if (parserMode <= eParserModeMute)
             VMPitchBend(pSynth, channel, pMIDIStream->d1, pMIDIStream->d2);
         break;
 
     default:
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL,"Unknown: %02x %02x %02x\n",
-            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL,"Unknown: %02x %02x %02x\n",
+            pMIDIStream->status, pMIDIStream->d1, pMIDIStream->d2); }
     }
     return EAS_SUCCESS;
 }
@@ -549,7 +549,7 @@ static EAS_RESULT ProcessSysExMessage (S_EAS_DATA *pEASData, S_SYNTH *pSynth, S_
             break;
 
         case eSysExEOX:
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Expected F7, received %02x\n", c); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "Expected F7, received %02x\n", c); }
             pMIDIStream->sysExState = eSysExIgnore;
             break;
 
@@ -563,7 +563,7 @@ static EAS_RESULT ProcessSysExMessage (S_EAS_DATA *pEASData, S_SYNTH *pSynth, S_
     }
 
     if (pMIDIStream->sysExState == eSysExIgnore)
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Ignoring SysEx byte %02x\n", c); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "Ignoring SysEx byte %02x\n", c); }
     return EAS_SUCCESS;
 } /* end ProcessSysExMessage */
 

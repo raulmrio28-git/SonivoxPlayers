@@ -683,8 +683,8 @@ static EAS_RESULT WaveParseHeader (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileHan
                 break;
 
             default:
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WaveParseHeader: %c%c%c%c chunk - %d byte(s) ignored\n",
-                    (char) (tag >> 24), (char) (tag >> 16), (char) (tag >> 8), (char) tag, size); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "WaveParseHeader: %c%c%c%c chunk - %d byte(s) ignored\n",
+                    (char) (tag >> 24), (char) (tag >> 16), (char) (tag >> 8), (char) tag, size); }
                 break;
         }
 
@@ -702,8 +702,8 @@ static EAS_RESULT WaveParseHeader (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileHan
         if (size >= fileSize)
         {
             if (size > fileSize)
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WaveParseHeader: '%c%c%c%c' chunk size exceeds length of file or is not zero-padded\n",
-                    (char) (tag >> 24), (char) (tag >> 16), (char) (tag >> 8), (char) tag, size); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "WaveParseHeader: '%c%c%c%c' chunk size exceeds length of file or is not zero-padded\n",
+                    (char) (tag >> 24), (char) (tag >> 16), (char) (tag >> 8), (char) tag, size); }
             break;
         }
 
@@ -800,8 +800,8 @@ static EAS_RESULT WaveGetMetaData (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData,
                 break;
 
             default:
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WaveParseHeader: %c%c%c%c chunk - %d byte(s) ignored\n",
-                    (char) (tag >> 24), (char) (tag >> 16), (char) (tag >> 8), (char) tag, size); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "WaveParseHeader: %c%c%c%c chunk - %d byte(s) ignored\n",
+                    (char) (tag >> 24), (char) (tag >> 16), (char) (tag >> 8), (char) tag, size); }
                 break;
         }
 

@@ -275,7 +275,7 @@ static void WT_SustainPedal (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNTH_VO
     pVoice->voiceFlags |= VOICE_FLAG_SUSTAIN_PEDAL_DEFER_NOTE_OFF;
 
 #ifdef _DEBUG_SYNTH
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WT_SustainPedal: defer note off because sustain pedal is on\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "WT_SustainPedal: defer note off because sustain pedal is on\n"); }
 #endif
 }
 
@@ -345,7 +345,7 @@ static EAS_RESULT WT_StartVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNT
     pWTVoice->artIndex = pRegion->artIndex;
 
 #ifdef _DEBUG_SYNTH
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WT_StartVoice: Voice %ld; Region %d\n", (EAS_I32) (pVoice - pVoiceMgr->voices), regionIndex); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "WT_StartVoice: Voice %ld; Region %d\n", (EAS_I32) (pVoice - pVoiceMgr->voices), regionIndex); }
 #endif
 
     pArt = &pSynth->pEAS->pArticulations[pWTVoice->artIndex];
@@ -895,8 +895,8 @@ static void WT_UpdateEG1 (S_WT_VOICE *pWTVoice, const S_ENVELOPE *pEnv)
         default:
             temp = 0;
 #ifdef  _DEBUG_SYNTH
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WT_UpdateEG1: error, %d is an unrecognized state\n",
-                pWTVoice->eg1State); */ }
+            { EAS_Report(_EAS_SEVERITY_INFO, "WT_UpdateEG1: error, %d is an unrecognized state\n",
+                pWTVoice->eg1State); }
 #endif
             break;
 
@@ -983,8 +983,8 @@ static void WT_UpdateEG2 (S_WT_VOICE *pWTVoice, const S_ENVELOPE *pEnv)
         default:
             temp = 0;
 #ifdef  _DEBUG_SYNTH
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "WT_UpdateEG2: error, %d is an unrecognized state\n",
-                pWTVoice->eg2State); */ }
+            { EAS_Report(_EAS_SEVERITY_INFO, "WT_UpdateEG2: error, %d is an unrecognized state\n",
+                pWTVoice->eg2State); }
 #endif
             break;
     }

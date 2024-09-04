@@ -111,7 +111,7 @@ static void PutBackChar (S_IMELODY_DATA *pData)
 {
     if (pData->index)
         pData->index--;
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "PutBackChar '%c'\n", pData->buffer[pData->index]); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "PutBackChar '%c'\n", pData->buffer[pData->index]); }
 }
 #else
 EAS_INLINE void PutBackChar (S_IMELODY_DATA *pData) { if (pData->index) pData->index--; }
@@ -197,7 +197,7 @@ static EAS_RESULT IMY_CheckFileType (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileH
     EAS_U8 index;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_CheckFileType\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_CheckFileType\n"); }
 #endif
 
     /* read the first line of the file */
@@ -255,7 +255,7 @@ static EAS_RESULT IMY_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     EAS_RESULT result;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_Prepare\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_Prepare\n"); }
 #endif
 
     /* check for valid state */
@@ -266,7 +266,7 @@ static EAS_RESULT IMY_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     /* instantiate a synthesizer */
     if ((result = VMInitMIDI(pEASData, &pData->pSynth)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); }
         return result;
     }
 
@@ -275,7 +275,7 @@ static EAS_RESULT IMY_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
         return result;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Prepare: state set to EAS_STATE_READY\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Prepare: state set to EAS_STATE_READY\n"); }
 #endif
 
     pData ->state = EAS_STATE_READY;
@@ -351,7 +351,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
     {
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Event: Reset\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Event: Reset\n"); }
 #endif
         /* set program to square lead */
         VMProgramChange(pEASData->pVoiceMgr, pData->pSynth, IMELODY_CHANNEL, IMELODY_PROGRAM);
@@ -365,7 +365,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
     {
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Stopping note %d\n", pData->note); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Stopping note %d\n", pData->note); }
 #endif
         /* stop the note */
         VMStopNote(pEASData->pVoiceMgr, pData->pSynth, IMELODY_CHANNEL, pData->note, 0);
@@ -394,7 +394,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
             case '(':
 
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter repeat section\n", c); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter repeat section\n", c); }
 #endif
 
                 if (pData->repeatOffset < 0)
@@ -405,18 +405,18 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                     pData->repeatTime = pData->time;
 
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Repeat offset = %d\n", pData->repeatOffset); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "Repeat offset = %d\n", pData->repeatOffset); }
 #endif
                 }
                 else
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Ignoring nested repeat section\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Ignoring nested repeat section\n"); }
                 break;
 
             /* end repeat */
             case ')':
 
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "End repeat section, repeat offset = %d\n", pData->repeatOffset); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "End repeat section, repeat offset = %d\n", pData->repeatOffset); }
 #endif
                 /* ignore zero-length loops */
                 if (pData->repeatTime == pData->time) {
@@ -431,7 +431,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                         {
                             pData->repeatCount = -1;
 #ifdef _DEBUG_IMELODY
-                            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Repeat loop complete\n"); */ }
+                            { EAS_Report(_EAS_SEVERITY_DETAIL, "Repeat loop complete\n"); }
 #endif
                         }
                     }
@@ -442,7 +442,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                     {
 
 #ifdef _DEBUG_IMELODY
-                        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Rewinding file for repeat\n"); */ }
+                        { EAS_Report(_EAS_SEVERITY_DETAIL, "Rewinding file for repeat\n"); }
 #endif
                         /* rewind to start of loop */
                         if ((result = EAS_HWFileSeek(pEASData->hwInstData, pData->fileHandle, pData->repeatOffset)) != EAS_SUCCESS)
@@ -465,7 +465,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                 {
 
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Repeat count = %dt", pData->repeatCount); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "Repeat count = %dt", pData->repeatCount); }
 #endif
                     if (pData->repeatCount < 0)
                         pData->repeatCount = (EAS_I16) temp;
@@ -536,7 +536,7 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
             /* EOF */
             case 0:
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Event: end of iMelody file detected\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Event: end of iMelody file detected\n"); }
 #endif
                 eof = EAS_TRUE;
             break;
@@ -551,14 +551,14 @@ static EAS_RESULT IMY_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                     eof = EAS_TRUE;
                 }
                 else
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Ignoring unexpected character '%c' [0x%02x]\n", c, c); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Ignoring unexpected character '%c' [0x%02x]\n", c, c); }
                 break;
         }
     }
 
     /* handle EOF */
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Event: state set to EAS_STATE_STOPPING\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Event: state set to EAS_STATE_STOPPING\n"); }
 #endif
     pData->state = EAS_STATE_STOPPING;
     VMReleaseAllVoices(pEASData->pVoiceMgr, pData->pSynth);
@@ -598,7 +598,7 @@ static EAS_RESULT IMY_State (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
         {
             pData->state = EAS_STATE_STOPPED;
 #ifdef _DEBUG_IMELODY
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_State: state set to EAS_STATE_STOPPED\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_State: state set to EAS_STATE_STOPPED\n"); }
 #endif
         }
     }
@@ -608,7 +608,7 @@ static EAS_RESULT IMY_State (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
         if (VMActiveVoices(pData->pSynth) == 0)
         {
 #ifdef _DEBUG_IMELODY
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_State: state set to EAS_STATE_PAUSED\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_State: state set to EAS_STATE_PAUSED\n"); }
 #endif
             pData->state = EAS_STATE_PAUSED;
         }
@@ -642,7 +642,7 @@ static EAS_RESULT IMY_Close (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     EAS_RESULT result;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Close: close file\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Close: close file\n"); }
 #endif
 
     pData = (S_IMELODY_DATA*) pInstData;
@@ -685,7 +685,7 @@ static EAS_RESULT IMY_Reset (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     EAS_RESULT result;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Reset: reset file\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Reset: reset file\n"); }
 #endif
     pData = (S_IMELODY_DATA*) pInstData;
 
@@ -704,7 +704,7 @@ static EAS_RESULT IMY_Reset (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
         return result;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Reset: state set to EAS_STATE_ERROR\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Reset: state set to EAS_STATE_ERROR\n"); }
 #endif
 
     pData->state = EAS_STATE_READY;
@@ -734,7 +734,7 @@ static EAS_RESULT IMY_Pause (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     S_IMELODY_DATA *pData;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Pause: pause file\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Pause: pause file\n"); }
 #endif
 
     /* can't pause a stopped stream */
@@ -771,7 +771,7 @@ static EAS_RESULT IMY_Resume (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     S_IMELODY_DATA *pData;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_Resume: resume file\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_Resume: resume file\n"); }
 #endif
 
     /* can't resume a stopped stream */
@@ -893,7 +893,7 @@ static EAS_BOOL IMY_PlayNote (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData, EAS_I
 
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_PlayNote: start note %d\n", note); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_PlayNote: start note %d\n", note); }
 #endif
 
     /* get the duration */
@@ -909,7 +909,7 @@ static EAS_BOOL IMY_PlayNote (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData, EAS_I
         VMStartNote(pEASData->pVoiceMgr, pData->pSynth, IMELODY_CHANNEL, pData->note, velocity);
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_PlayNote: Start note %d, duration %d\n", pData->note, duration); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_PlayNote: Start note %d, duration %d\n", pData->note, duration); }
 #endif
 
     /* determine note length */
@@ -927,7 +927,7 @@ static EAS_BOOL IMY_PlayNote (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData, EAS_I
             pData->restTicks = duration >> 1;
             break;
         default:
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "IMY_PlayNote: Note style out of range: %d\n", pData->style); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "IMY_PlayNote: Note style out of range: %d\n", pData->style); }
             /*lint -e{704} shift for performance */
             pData->restTicks = duration >> 4;
             break;
@@ -963,7 +963,7 @@ static EAS_BOOL IMY_PlayRest (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
     EAS_I32 duration;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_PlayRest]n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_PlayRest]n"); }
 #endif
 
     /* get the duration */
@@ -971,7 +971,7 @@ static EAS_BOOL IMY_PlayRest (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
         return EAS_FALSE;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_PlayRest: note duration %d\n", duration); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_PlayRest: note duration %d\n", duration); }
 #endif
 
     /* next event is at end of this note */
@@ -1009,7 +1009,7 @@ static EAS_BOOL IMY_GetDuration (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *
     if ((c < '0') || (c > '5'))
     {
 #ifdef _DEBUG_IMELODY
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetDuration: error in duration '%c'\n", c); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetDuration: error in duration '%c'\n", c); }
 #endif
         return EAS_FALSE;
     }
@@ -1060,7 +1060,7 @@ static EAS_BOOL IMY_GetLEDState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
     EAS_INT i;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_GetLEDState\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_GetLEDState\n"); }
 #endif
 
     for (i = 0; i < 5; i++)
@@ -1074,7 +1074,7 @@ static EAS_BOOL IMY_GetLEDState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
                 if (c == 'n')
                 {
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetLEDState: LED on\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetLEDState: LED on\n"); }
 #endif
                     EAS_HWLED(pEASData->hwInstData, EAS_TRUE);
                     return EAS_TRUE;
@@ -1087,7 +1087,7 @@ static EAS_BOOL IMY_GetLEDState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
                 if (c == 'f')
                 {
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetLEDState: LED off\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetLEDState: LED off\n"); }
 #endif
                     EAS_HWLED(pEASData->hwInstData, EAS_FALSE);
                     return EAS_TRUE;
@@ -1125,7 +1125,7 @@ static EAS_BOOL IMY_GetVibeState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
     EAS_INT i;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_GetVibeState\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_GetVibeState\n"); }
 #endif
 
     for (i = 0; i < 6; i++)
@@ -1139,7 +1139,7 @@ static EAS_BOOL IMY_GetVibeState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
                 if (c == 'n')
                 {
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetVibeState: vibrate on\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetVibeState: vibrate on\n"); }
 #endif
                     EAS_HWVibrate(pEASData->hwInstData, EAS_TRUE);
                     return EAS_TRUE;
@@ -1152,7 +1152,7 @@ static EAS_BOOL IMY_GetVibeState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
                 if (c == 'f')
                 {
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetVibeState: vibrate off\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetVibeState: vibrate off\n"); }
 #endif
                     EAS_HWVibrate(pEASData->hwInstData, EAS_FALSE);
                     return EAS_TRUE;
@@ -1190,7 +1190,7 @@ static EAS_BOOL IMY_GetBackState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
     EAS_INT i;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_GetBackState\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_GetBackState\n"); }
 #endif
 
     for (i = 0; i < 5; i++)
@@ -1204,7 +1204,7 @@ static EAS_BOOL IMY_GetBackState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
                 if (c == 'n')
                 {
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetBackState: backlight on\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetBackState: backlight on\n"); }
 #endif
                     EAS_HWBackLight(pEASData->hwInstData, EAS_TRUE);
                     return EAS_TRUE;
@@ -1217,7 +1217,7 @@ static EAS_BOOL IMY_GetBackState (S_EAS_DATA *pEASData, S_IMELODY_DATA *pData)
                 if (c == 'f')
                 {
 #ifdef _DEBUG_IMELODY
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetBackState: backlight off\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetBackState: backlight off\n"); }
 #endif
                     EAS_HWBackLight(pEASData->hwInstData, EAS_FALSE);
                     return EAS_TRUE;
@@ -1255,7 +1255,7 @@ static EAS_BOOL IMY_GetVolume (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
     EAS_I8 c;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_GetVolume\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_GetVolume\n"); }
 #endif
 
     c = IMY_GetNextChar(hwInstData, pData, inHeader);
@@ -1284,7 +1284,7 @@ static EAS_BOOL IMY_GetVolume (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
     if ((temp >= 0) && (temp <= 15))
     {
         if (inHeader && (temp == 0))
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Ignoring V0 encountered in header\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "Ignoring V0 encountered in header\n"); }
         else
             pData->volume = (EAS_U8) temp;
     }
@@ -1313,7 +1313,7 @@ static EAS_BOOL IMY_GetNumber (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
     EAS_I8 c;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_GetNumber\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_GetNumber\n"); }
 #endif
 
     *temp = 0;
@@ -1332,7 +1332,7 @@ static EAS_BOOL IMY_GetNumber (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
                 PutBackChar(pData);
 
 #ifdef _DEBUG_IMELODY
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetNumber: value %d\n", *temp); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetNumber: value %d\n", *temp); }
 #endif
 
             return ok;
@@ -1374,7 +1374,7 @@ static EAS_BOOL IMY_GetVersion (S_IMELODY_DATA *pData, EAS_INT *pVersion)
             {
 
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetVersion: version 0x%04x\n", version); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetVersion: version 0x%04x\n", version); }
 #endif
 
                 *pVersion = version;
@@ -1450,7 +1450,7 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
     EAS_I8 c;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Enter IMY_ParseHeader\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Enter IMY_ParseHeader\n"); }
 #endif
 
     /* initialize some defaults */
@@ -1477,7 +1477,7 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
             if ((result = IMY_ReadLine(pEASData->hwInstData, pData->fileHandle, pData->buffer, &pData->startLine)) != EAS_SUCCESS)
             {
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_ParseHeader: IMY_ReadLine returned %d\n", result); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_ParseHeader: IMY_ReadLine returned %d\n", result); }
 #endif
                 return result;
             }
@@ -1493,12 +1493,12 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
             case TOKEN_FORMAT:
                 if (!IMY_GetVersion(pData, &temp))
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Invalid FORMAT field '%s'\n", pData->buffer); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Invalid FORMAT field '%s'\n", pData->buffer); }
                     return EAS_ERROR_FILE_FORMAT;
                 }
                 if ((temp != 0x0100) && (temp != 0x0200))
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unsupported FORMAT %02x\n", temp); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Unsupported FORMAT %02x\n", temp); }
                     return EAS_ERROR_UNRECOGNIZED_FORMAT;
                 }
                 break;
@@ -1506,12 +1506,12 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
             case TOKEN_VERSION:
                 if (!IMY_GetVersion(pData, &temp))
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Invalid VERSION field '%s'\n", pData->buffer); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Invalid VERSION field '%s'\n", pData->buffer); }
                     return EAS_ERROR_FILE_FORMAT;
                 }
                 if ((temp != 0x0100) && (temp != 0x0102))
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unsupported VERSION %02x\n", temp); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Unsupported VERSION %02x\n", temp); }
                     return EAS_ERROR_UNRECOGNIZED_FORMAT;
                 }
                 break;
@@ -1541,7 +1541,7 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
                 else
                 {
                     PutBackChar(pData);
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Error in style command: %s\n", pData->buffer); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Error in style command: %s\n", pData->buffer); }
                 }
                 break;
 
@@ -1553,7 +1553,7 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
                     PutBackChar(pData);
                     if (!IsDigit(c))
                     {
-                        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Error in volume command: %s\n", pData->buffer); */ }
+                        { EAS_Report(_EAS_SEVERITY_WARNING, "Error in volume command: %s\n", pData->buffer); }
                         break;
                     }
                 }
@@ -1562,18 +1562,18 @@ static EAS_RESULT IMY_ParseHeader (S_EAS_DATA *pEASData, S_IMELODY_DATA* pData)
 
             case TOKEN_MELODY:
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Header successfully parsed\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "Header successfully parsed\n"); }
 #endif
                 return EAS_SUCCESS;
 
             case TOKEN_END:
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unexpected END:IMELODY encountered\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_WARNING, "Unexpected END:IMELODY encountered\n"); }
                 return EAS_ERROR_FILE_FORMAT;
 
             default:
                 /* force a read of the next line */
                 pData->index = 1;
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Ignoring unrecognized token in iMelody file: %s\n", pData->buffer); */ }
+                { EAS_Report(_EAS_SEVERITY_WARNING, "Ignoring unrecognized token in iMelody file: %s\n", pData->buffer); }
                 break;
         }
     }
@@ -1617,7 +1617,7 @@ static EAS_I8 IMY_GetNextChar (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
             if (IMY_ReadLine(hwInstData, pData->fileHandle, pData->buffer, &pData->startLine) != EAS_SUCCESS)
             {
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetNextChar: EOF\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetNextChar: EOF\n"); }
 #endif
                 return 0;
             }
@@ -1626,7 +1626,7 @@ static EAS_I8 IMY_GetNextChar (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
             if (IMY_ParseLine(pData->buffer, &index) == TOKEN_END)
             {
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetNextChar: found END:IMELODY\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetNextChar: found END:IMELODY\n"); }
 #endif
                 pData->buffer[0] = 0;
                 return 0;
@@ -1639,7 +1639,7 @@ static EAS_I8 IMY_GetNextChar (EAS_HW_DATA_HANDLE hwInstData, S_IMELODY_DATA *pD
         {
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_GetNextChar returned '%c'\n", c); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_GetNextChar returned '%c'\n", c); }
 #endif
             return c;
         }
@@ -1674,7 +1674,7 @@ static EAS_RESULT IMY_ReadLine (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE f
         if ((result = EAS_HWFilePos(hwInstData, fileHandle, pStartLine)) != EAS_SUCCESS)
         {
 #ifdef _DEBUG_IMELODY
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_ParseHeader: EAS_HWFilePos returned %d\n", result); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_ParseHeader: EAS_HWFilePos returned %d\n", result); }
 #endif
             return result;
         }
@@ -1701,7 +1701,7 @@ static EAS_RESULT IMY_ReadLine (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE f
     buffer[i] = 0;
 
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_ReadLine read %s\n", buffer); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_ReadLine read %s\n", buffer); }
 #endif
 
     return EAS_SUCCESS;
@@ -1737,7 +1737,7 @@ static EAS_INT IMY_ParseLine (EAS_I8 *buffer, EAS_U8 *pIndex)
             if (tokens[i][j] == 0)
             {
 #ifdef _DEBUG_IMELODY
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_ParseLine found token %d\n", i); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_ParseLine found token %d\n", i); }
 #endif
                 *pIndex = (EAS_U8) j;
                 return i;
@@ -1747,7 +1747,7 @@ static EAS_INT IMY_ParseLine (EAS_I8 *buffer, EAS_U8 *pIndex)
         }
     }
 #ifdef _DEBUG_IMELODY
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMY_ParseLine: no token found\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IMY_ParseLine: no token found\n"); }
 #endif
     return TOKEN_INVALID;
 }

@@ -80,7 +80,7 @@ EAS_RESULT EAS_MixEngineInit (S_EAS_DATA *pEASData)
         pEASData->pMixBuffer = EAS_HWMalloc(pEASData->hwInstData, BUFFER_SIZE_IN_MONO_SAMPLES * NUM_OUTPUT_CHANNELS * sizeof(EAS_I32));
     if (pEASData->pMixBuffer == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "Failed to allocate mix buffer memory\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "Failed to allocate mix buffer memory\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
     EAS_HWMemSet((void *)(pEASData->pMixBuffer), 0, BUFFER_SIZE_IN_MONO_SAMPLES * NUM_OUTPUT_CHANNELS * sizeof(EAS_I32));

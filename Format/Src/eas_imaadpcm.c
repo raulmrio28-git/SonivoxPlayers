@@ -126,7 +126,7 @@ static EAS_RESULT IMADecoderSample (EAS_DATA_HANDLE pEASData, S_PCM_STATE *pStat
             pState->bytesLeft = pState->byteCount = (EAS_I32) pState->bytesLeftLoop;
             pState->blockCount = 0;
             pState->flags &= ~PCM_FLAGS_EMPTY;
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IMADecoderSample: Rewind file to %d, bytesLeft = %d\n", pState->startPos, pState->bytesLeft); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "IMADecoderSample: Rewind file to %d, bytesLeft = %d\n", pState->startPos, pState->bytesLeft); }
         }
 
         /* if start of block, fetch new predictor and step index */
@@ -137,7 +137,7 @@ static EAS_RESULT IMADecoderSample (EAS_DATA_HANDLE pEASData, S_PCM_STATE *pStat
             if ((result = EAS_HWGetWord(pEASData->hwInstData, pState->fileHandle, &sTemp, EAS_FALSE)) != EAS_SUCCESS)
                 return result;
 #ifdef _DEBUG_IMA_ADPCM
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Predictor: Was %d, now %d\n", pState->decoderL.acc, sTemp); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "Predictor: Was %d, now %d\n", pState->decoderL.acc, sTemp); }
 #endif
             pState->decoderL.acc = pState->decoderL.x1 = sTemp;
 
@@ -145,7 +145,7 @@ static EAS_RESULT IMADecoderSample (EAS_DATA_HANDLE pEASData, S_PCM_STATE *pStat
             if ((result = EAS_HWGetWord(pEASData->hwInstData, pState->fileHandle, &sTemp, EAS_FALSE)) != EAS_SUCCESS)
                 return result;
 #ifdef _DEBUG_IMA_ADPCM
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Step: Was %d, now %d\n", pState->decoderL.step, sTemp); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "Step: Was %d, now %d\n", pState->decoderL.step, sTemp); }
 #endif
             pState->decoderL.step = sTemp & 0xff;
 
@@ -160,7 +160,7 @@ static EAS_RESULT IMADecoderSample (EAS_DATA_HANDLE pEASData, S_PCM_STATE *pStat
                 if ((result = EAS_HWGetWord(pEASData->hwInstData, pState->fileHandle, &sTemp, EAS_FALSE)) != EAS_SUCCESS)
                     return result;
 #ifdef _DEBUG_IMA_ADPCM
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Step: Was %d, now %d\n", pState->decoderR.step, sTemp); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "Step: Was %d, now %d\n", pState->decoderR.step, sTemp); }
 #endif
                 pState->decoderR.step = sTemp & 0xff;
 
@@ -267,7 +267,7 @@ static void IMADecoderADPCM (S_DECODER_STATE *pState, EAS_U8 nibble)
         pState->step = 88;
 
 #ifdef _DEBUG_IMA_ADPCM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "In=%u, Pred=%d, Step=%d\n", nibble, pState->acc,  imaStepSizeTable[pState->step]); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "In=%u, Pred=%d, Step=%d\n", nibble, pState->acc,  imaStepSizeTable[pState->step]); }
 #endif
 }
 

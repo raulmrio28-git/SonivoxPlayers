@@ -142,7 +142,7 @@ EAS_RESULT EAS_PEInit(S_EAS_DATA* pEASData)
 
     if (!pEASData->pPCMStreams)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "Failed to allocate memory for PCM streams\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "Failed to allocate memory for PCM streams\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
 
@@ -300,7 +300,7 @@ EAS_RESULT EAS_PEReset(S_EAS_DATA* pEASData, EAS_PCM_HANDLE pState)
     /* reset file position to first byte of data in the stream */
     if ((result = EAS_HWFileSeek(pEASData->hwInstData, pState->fileHandle, pState->startPos)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Error %d seeking to start of PCM file\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Error %d seeking to start of PCM file\n", result); }
         return result;
     }
 
@@ -333,26 +333,26 @@ EAS_RESULT EAS_PEOpenStream(S_EAS_DATA* pEASData, S_PCM_OPEN_PARAMS* pParams, EA
     /* make sure we support this decoder */
     if (pParams->decoder >= NUM_DECODER_MODULES)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Decoder selector out of range\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Decoder selector out of range\n"); }
         return EAS_ERROR_PARAMETER_RANGE;
     }
     if (decoders[pParams->decoder] == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Decoder module not available\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Decoder module not available\n"); }
         return EAS_ERROR_FEATURE_NOT_AVAILABLE;
     }
 
     /* find a slot for the new stream */
     if ((pState = FindSlot(pEASData, pParams->fileHandle, pParams->pCallbackFunc, pParams->cbInstData)) == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unable to open ADPCM stream, too many streams open\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Unable to open ADPCM stream, too many streams open\n"); }
         return EAS_ERROR_MAX_PCM_STREAMS;
     }
 
     /* get the current file position */
     if ((result = EAS_HWFilePos(pEASData->hwInstData, pState->fileHandle, &filePos)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_HWFilePos returned %ld\n",result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_HWFilePos returned %ld\n",result); }
         pState->fileHandle = NULL;
         return result;
     }
@@ -387,8 +387,8 @@ EAS_RESULT EAS_PEOpenStream(S_EAS_DATA* pEASData, S_PCM_OPEN_PARAMS* pParams, EA
 
     *pHandle = pState;
 
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "EAS_PEOpenStream: StartPos=%d, byteCount = %d, loopSamples=%d\n",
-        pState->startPos, pState->byteCount, pState->loopSamples); */
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "EAS_PEOpenStream: StartPos=%d, byteCount = %d, loopSamples=%d\n",
+        pState->startPos, pState->byteCount, pState->loopSamples);
     }
     return EAS_SUCCESS;
 }
@@ -898,7 +898,7 @@ static EAS_U32 CalcBaseFreq(EAS_U32 sampleRate)
     }
 
     /* if not found in table, do it the long way */
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Sample rate %u not in table, calculating by division\n", sampleRate); */ }
+    { EAS_Report(_EAS_SEVERITY_WARNING, "Sample rate %u not in table, calculating by division\n", sampleRate); }
 
     return (SRC_RATE_MULTIPLER * (EAS_U32)sampleRate) >> 15;
 }
@@ -1191,7 +1191,7 @@ static EAS_RESULT RenderPCMStream(S_EAS_DATA* pEASData, S_PCM_STATE* pState, EAS
             {
                 pState->flags |= PCM_FLAGS_EMPTY;
                 (*pState->pCallback)(pEASData, pState->cbInstData, pState, EAS_STATE_EMPTY);
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "RenderPCMStream: After empty callback, bytesLeft = %d\n", pState->bytesLeft); */ }
+                { EAS_Report(_EAS_SEVERITY_DETAIL, "RenderPCMStream: After empty callback, bytesLeft = %d\n", pState->bytesLeft); }
             }
 
             /* decode the next sample */
@@ -1267,7 +1267,7 @@ static EAS_RESULT LinearPCMDecode(EAS_DATA_HANDLE pEASData, S_PCM_STATE* pState)
             return result;
         pState->bytesLeft = pState->byteCount = (EAS_I32)pState->bytesLeftLoop;
         pState->flags &= ~PCM_FLAGS_EMPTY;
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "LinearPCMDecode: Rewind file to %d, bytesLeft = %d\n", pState->startPos, pState->bytesLeft); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "LinearPCMDecode: Rewind file to %d, bytesLeft = %d\n", pState->startPos, pState->bytesLeft); }
     }
 
     if (pState->bytesLeft)
@@ -1441,7 +1441,7 @@ EAS_RESULT EAS_PESeek(S_EAS_DATA* pEASData, S_PCM_STATE* pState, EAS_I32* pLocat
     while (*pLocation > (EAS_I32)pState->bytesLeft)
     {
         /* seek to end of audio chunk */
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "EAS_PESeek: Seek to offset = %d\n", pState->bytesLeft); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "EAS_PESeek: Seek to offset = %d\n", pState->bytesLeft); }
         if ((result = EAS_HWFileSeekOfs(pEASData->hwInstData, pState->fileHandle, pState->bytesLeft)) != EAS_SUCCESS)
         {
             pState->state = EAS_STATE_ERROR;
@@ -1455,7 +1455,7 @@ EAS_RESULT EAS_PESeek(S_EAS_DATA* pEASData, S_PCM_STATE* pState, EAS_I32* pLocat
         if (pState->pCallback)
             (*pState->pCallback)(pEASData, pState->cbInstData, pState, EAS_STATE_EMPTY);
 
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "EAS_PESeek: bytesLeft=%d, byte location = %d\n", pState->bytesLeft, *pLocation); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "EAS_PESeek: bytesLeft=%d, byte location = %d\n", pState->bytesLeft, *pLocation); }
 
         /* no more samples */
         if (pState->bytesLeft == 0)
@@ -1465,7 +1465,7 @@ EAS_RESULT EAS_PESeek(S_EAS_DATA* pEASData, S_PCM_STATE* pState, EAS_I32* pLocat
     /* seek to new offset in current chunk */
     if (*pLocation > 0)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "EAS_PESeek: Seek to offset = %d\n", *pLocation); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "EAS_PESeek: Seek to offset = %d\n", *pLocation); }
         if ((result = EAS_HWFileSeekOfs(pEASData->hwInstData, pState->fileHandle, *pLocation)) != EAS_SUCCESS)
         {
             pState->state = EAS_STATE_ERROR;

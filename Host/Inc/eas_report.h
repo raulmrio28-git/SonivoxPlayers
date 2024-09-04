@@ -59,14 +59,12 @@ typedef struct
 /* debug message handling prototypes */
 extern void EAS_ReportEx (int severity, unsigned long hashCode, int serialNum, ...);
 
-#else
+#endif
+//Konakona move EAS report 20240904
 
 /* these prototypes are used if the debug preprocessor is not used */
-extern void EAS_Report (int severity, const char* fmt, ...);
-extern void EAS_ReportX (int severity, const char* fmt, ...);
-
-#endif
-
+extern void EAS_Report(int severity, const char* fmt, ...);
+extern void EAS_ReportX(int severity, const char* fmt, ...);
 extern void EAS_SetDebugLevel (int severity);
 extern void EAS_SetDebugFile (void *file, int flushAfterWrite);
 

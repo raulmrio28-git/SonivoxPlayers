@@ -145,8 +145,8 @@ static EAS_RESULT XMF_CheckFileType (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileH
 
         if (temp != XMF_FILE_TYPE)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR,
-                          "XMF file type was 0x%08x, expected 0x%08x\n", temp, XMF_FILE_TYPE); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR,
+                          "XMF file type was 0x%08x, expected 0x%08x\n", temp, XMF_FILE_TYPE); }
             return EAS_SUCCESS;
         }
 
@@ -157,14 +157,14 @@ static EAS_RESULT XMF_CheckFileType (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileH
 
         if (temp != XMF_SPEC_LEVEL)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR,
-                          "XMF file spec was 0x%08x, expected 0x%08x\n", temp, XMF_SPEC_LEVEL); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR,
+                          "XMF file spec was 0x%08x, expected 0x%08x\n", temp, XMF_SPEC_LEVEL); }
             return EAS_SUCCESS;
         }
     }
     else if (temp != XMF_VERSION_1_00 && temp != XMF_VERSION_1_01)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "XMF file version was 0x%08x\n", temp); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "XMF file version was 0x%08x\n", temp); }
         return EAS_SUCCESS;
     }
 
@@ -185,7 +185,7 @@ static EAS_RESULT XMF_CheckFileType (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileH
     /* locate the SMF and DLS contents */
     if ((result = XMF_FindFileContents(pEASData->hwInstData, pXMFData)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "No SMF data found in XMF file\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "No SMF data found in XMF file\n"); }
         EAS_HWFree(pEASData->hwInstData, pXMFData);
         return result;
     }
@@ -232,7 +232,7 @@ static EAS_RESULT XMF_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     {
         if ((result = DLSParser(pEASData->hwInstData, pXMFData->fileHandle, pXMFData->dlsOffset, &pXMFData->pDLS)) != EAS_SUCCESS)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Error converting XMF DLS data\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "Error converting XMF DLS data\n"); }
             return result;
         }
     }
@@ -572,13 +572,13 @@ static EAS_RESULT XMF_FindFileContents (EAS_HW_DATA_HANDLE hwInstData, S_XMF_DAT
     /* check for SMF data */
     if (pXMFData->midiOffset == 0)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "No SMF data found in XMF file\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "No SMF data found in XMF file\n"); }
         return EAS_ERROR_FILE_FORMAT;
     }
 
     /* check for SFM in wrong order */
     if ((pXMFData->dlsOffset > 0) && (pXMFData->midiOffset < pXMFData->dlsOffset))
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS data must precede SMF data in Mobile XMF file\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS data must precede SMF data in Mobile XMF file\n"); }
 
     return EAS_SUCCESS;
 }
@@ -690,7 +690,7 @@ static EAS_RESULT XMF_ReadNode (EAS_HW_DATA_HANDLE hwInstData, S_XMF_DATA *pXMFD
         /* or else it must be an inline resource */
         else if (refType != 1)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unexpected reference type %d\n", refType); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Unexpected reference type %d\n", refType); }
             return EAS_ERROR_FILE_FORMAT;
         }
 
@@ -811,7 +811,7 @@ static EAS_RESULT XMF_FindFileContents(S_EAS_DATA *pEASData, S_XMF_DATA *pXMFDat
     /* make sure it is an in-line resource, for now */
     if (value != 1)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Problem parsing XMF file tree\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Problem parsing XMF file tree\n"); }
         return EAS_FAILURE;
     }
 
@@ -833,7 +833,7 @@ static EAS_RESULT XMF_FindFileContents(S_EAS_DATA *pEASData, S_XMF_DATA *pXMFDat
         /* make sure not a folder */
         if (value != 0)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Problem parsing XMF file node\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Problem parsing XMF file node\n"); }
             return EAS_FAILURE;
         }
 
@@ -850,7 +850,7 @@ static EAS_RESULT XMF_FindFileContents(S_EAS_DATA *pEASData, S_XMF_DATA *pXMFDat
         /* make sure it is an in-line resource */
         if (value != 1)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Problem parsing XMF file node\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Problem parsing XMF file node\n"); }
             return EAS_FAILURE;
         }
 

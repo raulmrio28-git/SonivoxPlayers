@@ -91,7 +91,7 @@ static EAS_RESULT ReverbInit(EAS_DATA_HANDLE pEASData, EAS_VOID_PTR *pInstData)
 
     if (pReverbData == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "Failed to allocate Reverb memory\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "Failed to allocate Reverb memory\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
 

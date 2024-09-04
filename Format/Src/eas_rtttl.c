@@ -197,7 +197,7 @@ static EAS_RESULT RTTTL_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     /* instantiate a synthesizer */
     if ((result = VMInitMIDI(pEASData, &pData->pSynth)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); }
         return result;
     }
 
@@ -491,7 +491,7 @@ static EAS_RESULT RTTTL_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS
                         break;
 
                     default:
-                        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "RTTTL_Event: Unexpected style type %c\n", pData->style); */ }
+                        { EAS_Report(_EAS_SEVERITY_WARNING, "RTTTL_Event: Unexpected style type %c\n", pData->style); }
                         break;
                 }
 

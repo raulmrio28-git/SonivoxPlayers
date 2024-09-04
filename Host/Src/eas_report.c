@@ -38,7 +38,7 @@
 
 #include "eas_report.h"
 
-static int severityLevel = 9999;
+static int severityLevel = 0;
 
 /* debug file */
 static FILE *debugFile = NULL;
@@ -175,8 +175,10 @@ void EAS_ReportEx (int severity, unsigned long hashCode, int serialNum, ...)
     }
     printf("Unrecognized error: Severity=%d; HashCode=%lu; SerialNum=%d\n", severity, hashCode, serialNum);
 } /* end EAS_ReportEx */
+#endif
 
-#else
+//Konakona move EAS report 20240904
+
 /*----------------------------------------------------------------------------
  * EAS_Report()
  *
@@ -184,7 +186,7 @@ void EAS_ReportEx (int severity, unsigned long hashCode, int serialNum, ...)
  * messages to stdout. Modify this as needed for your system.
  *----------------------------------------------------------------------------
 */
-void EAS_Report (int severity, const char *fmt, ...)
+void EAS_Report(int severity, const char* fmt, ...)
 {
     va_list vargs;
 
@@ -214,7 +216,7 @@ void EAS_Report (int severity, const char *fmt, ...)
  * messages to stdout. Modify this as needed for your system.
  *----------------------------------------------------------------------------
 */
-void EAS_ReportX (int severity, const char *fmt, ...)
+void EAS_ReportX(int severity, const char* fmt, ...)
 {
     va_list vargs;
 
@@ -236,7 +238,6 @@ void EAS_ReportX (int severity, const char *fmt, ...)
     }
     va_end(vargs);
 } /* end EAS_ReportX */
-#endif
 
 /*----------------------------------------------------------------------------
  * EAS_SetDebugLevel()

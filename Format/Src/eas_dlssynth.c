@@ -127,7 +127,7 @@ void DLS_SustainPedal (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNTH_VOICE *p
     pVoice->voiceFlags |= VOICE_FLAG_SUSTAIN_PEDAL_DEFER_NOTE_OFF;
 
 #ifdef _DEBUG_SYNTH
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "DLS_SustainPedal: defer note off because sustain pedal is on\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "DLS_SustainPedal: defer note off because sustain pedal is on\n"); }
 #endif
 }
 
@@ -310,7 +310,7 @@ EAS_RESULT DLS_StartVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNTH_VOIC
     S_SYNTH_CHANNEL *pChannel;
 
 #ifdef _DEBUG_SYNTH
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "DLS_StartVoice: Voice %ld; Region %d\n", (EAS_I32) (pVoice - pVoiceMgr->voices), regionIndex); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "DLS_StartVoice: Voice %ld; Region %d\n", (EAS_I32) (pVoice - pVoiceMgr->voices), regionIndex); }
 #endif
 
     pWTVoice = &pVoiceMgr->wtVoices[voiceNum];
@@ -584,7 +584,7 @@ static void DLS_UpdateEnvelope (S_SYNTH_VOICE *pVoice, S_SYNTH_CHANNEL *pChannel
             return;
 
         default:
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Envelope in invalid state %d\n", *pState); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Envelope in invalid state %d\n", *pState); }
             break;
     }
 }

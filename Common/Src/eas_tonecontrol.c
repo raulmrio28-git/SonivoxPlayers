@@ -196,7 +196,7 @@ static EAS_RESULT TC_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     /* instantiate a synthesizer */
     if ((result = VMInitMIDI(pEASData, &pData->pSynth)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); }
         return result;
     }
 
@@ -346,7 +346,7 @@ static EAS_RESULT TC_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_IN
                 break;
 
             default:
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unexpected byte 0x%02x in ToneControl stream\n", temp); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "Unexpected byte 0x%02x in ToneControl stream\n", temp); }
                 result = EAS_ERROR_FILE_FORMAT;
         }
 
@@ -669,7 +669,7 @@ static EAS_RESULT TC_ParseHeader (S_EAS_DATA *pEASData, S_TC_DATA* pData)
     if (temp == TC_FIELD_VERSION)
     {
         TC_GetNextChar(pEASData->hwInstData, pData, &temp);
-//      { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "ToneControl sequence version %d\n", temp); */ }
+//      { EAS_Report(_EAS_SEVERITY_INFO, "ToneControl sequence version %d\n", temp); }
     }
     else
         return EAS_ERROR_FILE_FORMAT;
@@ -706,7 +706,7 @@ static EAS_RESULT TC_ParseHeader (S_EAS_DATA *pEASData, S_TC_DATA* pData)
         /* unknown codes */
         else
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unexpected byte 0x%02x in ToneControl stream\n", temp); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Unexpected byte 0x%02x in ToneControl stream\n", temp); }
             return EAS_ERROR_FILE_FORMAT;
         }
     }

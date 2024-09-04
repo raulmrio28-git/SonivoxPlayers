@@ -98,7 +98,7 @@ static EAS_RESULT ChorusInit (EAS_DATA_HANDLE pEASData, EAS_VOID_PTR *pInstData)
 
     if (pChorusData == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "Failed to allocate Chorus memory\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "Failed to allocate Chorus memory\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
 

@@ -508,7 +508,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
         return result;
     if (temp != CHUNK_DLS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Expected DLS chunk, got %08lx\n", temp); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Expected DLS chunk, got %08lx\n", temp); }
         return EAS_ERROR_FILE_FORMAT;
     }
 
@@ -559,21 +559,21 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
     /* must have a lins chunk */
     if (linsSize == 0)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "No lins chunk found"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "No lins chunk found"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
     /* must have a wvpl chunk */
     if (wvplSize == 0)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "No wvpl chunk found"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "No wvpl chunk found"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
     /* must have a ptbl chunk */
     if ((ptblSize == 0) || (ptblSize > (EAS_I32) (DLS_MAX_WAVE_COUNT * sizeof(POOLCUE) + sizeof(POOLTABLE))))
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "No ptbl chunk found"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "No ptbl chunk found"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -584,7 +584,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
     /* limit check  */
     if ((dls.waveCount == 0) || (dls.waveCount > DLS_MAX_WAVE_COUNT))
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS file contains invalid #waves [%u]\n", dls.waveCount); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS file contains invalid #waves [%u]\n", dls.waveCount); }
         return EAS_ERROR_FILE_FORMAT;
     }
 
@@ -592,7 +592,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
     dls.wsmpData = EAS_HWMalloc(dls.hwInstData, (EAS_I32) (sizeof(S_WSMP_DATA) * dls.waveCount));
     if (dls.wsmpData == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_HWMalloc for wsmp data failed\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_HWMalloc for wsmp data failed\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
     EAS_HWMemSet(dls.wsmpData, 0, (EAS_I32) (sizeof(S_WSMP_DATA) * dls.waveCount));
@@ -605,7 +605,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
         /* limit check  */
         if ((dls.regionCount == 0) || (dls.regionCount > DLS_MAX_REGION_COUNT))
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS file contains invalid #regions [%u]\n", dls.regionCount); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "DLS file contains invalid #regions [%u]\n", dls.regionCount); }
             EAS_HWFree(dls.hwInstData, dls.wsmpData);
             return EAS_ERROR_FILE_FORMAT;
         }
@@ -613,7 +613,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
         /* limit check  */
         if ((dls.artCount == 0) || (dls.artCount > DLS_MAX_ART_COUNT))
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS file contains invalid #articulations [%u]\n", dls.regionCount); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "DLS file contains invalid #articulations [%u]\n", dls.regionCount); }
             EAS_HWFree(dls.hwInstData, dls.wsmpData);
             return EAS_ERROR_FILE_FORMAT;
         }
@@ -621,7 +621,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
         /* limit check  */
         if ((dls.instCount == 0) || (dls.instCount > DLS_MAX_INST_COUNT))
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS file contains invalid #instruments [%u]\n", dls.instCount); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "DLS file contains invalid #instruments [%u]\n", dls.instCount); }
             EAS_HWFree(dls.hwInstData, dls.wsmpData);
             return EAS_ERROR_FILE_FORMAT;
         }
@@ -651,7 +651,7 @@ EAS_RESULT DLSParser (EAS_HW_DATA_HANDLE hwInstData, EAS_FILE_HANDLE fileHandle,
         dls.pDLS = EAS_HWMalloc(dls.hwInstData, size);
         if (dls.pDLS == NULL)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_HWMalloc failed for DLS memory allocation size %ld\n", size); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_HWMalloc failed for DLS memory allocation size %ld\n", size); }
             EAS_HWFree(dls.hwInstData, dls.wsmpData);
             return EAS_ERROR_MALLOC_FAILED;
         }
@@ -880,7 +880,7 @@ static EAS_RESULT Parse_ptbl (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_
             return result;
         if (temp > (EAS_U32) wtblSize)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Ptbl offset exceeds size of wtbl\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Ptbl offset exceeds size of wtbl\n"); }
             EAS_HWCloseFile(pDLSData->hwInstData, tempFile);
             return EAS_ERROR_FILE_FORMAT;
         }
@@ -936,7 +936,7 @@ static EAS_RESULT Parse_wave (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_
     /* make sure it is a wave chunk */
     if (temp != CHUNK_WAVE)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Offset in ptbl does not point to wave chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Offset in ptbl does not point to wave chunk\n"); }
         return EAS_ERROR_FILE_FORMAT;
     }
 
@@ -994,14 +994,14 @@ static EAS_RESULT Parse_wave (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_
     /* must have a fmt chunk */
     if (!fmtPos)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS wave chunk has no fmt chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS wave chunk has no fmt chunk\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
     /* must have a data chunk */
     if (!dataPos)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS wave chunk has no data chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS wave chunk has no data chunk\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -1064,7 +1064,7 @@ static EAS_RESULT Parse_wave (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_
     pDLSData->wavePoolOffset += (EAS_U32) size;
     if (pDLSData->wavePoolOffset > pDLSData->wavePoolSize)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Wave pool exceeded allocation\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Wave pool exceeded allocation\n"); }
         return EAS_ERROR_SOUND_LIBRARY;
     }
 
@@ -1111,7 +1111,7 @@ static EAS_RESULT Parse_wsmp (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_WS
     else
     {
         p->unityNote = 60;
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Invalid unity note [%u] in DLS wsmp ignored, set to 60\n", wtemp); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "Invalid unity note [%u] in DLS wsmp ignored, set to 60\n", wtemp); }
     }
 
     /* get fine tune */
@@ -1123,7 +1123,7 @@ static EAS_RESULT Parse_wsmp (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_WS
         return result;
     if (p->gain > 0)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Positive gain [%ld] in DLS wsmp ignored, set to 0dB\n", p->gain); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "Positive gain [%ld] in DLS wsmp ignored, set to 0dB\n", p->gain); }
         p->gain = 0;
     }
 
@@ -1140,7 +1140,7 @@ static EAS_RESULT Parse_wsmp (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_WS
     {
 
         if (ltemp > 1)
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS sample with %lu loops, ignoring extra loops\n", ltemp); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "DLS sample with %lu loops, ignoring extra loops\n", ltemp); }
 
         /* skip ahead to loop data */
         if ((result = EAS_HWFileSeek(pDLSData->hwInstData, pDLSData->fileHandle, pos + (EAS_I32) cbSize)) != EAS_SUCCESS)
@@ -1203,7 +1203,7 @@ static EAS_RESULT Parse_fmt (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_WSM
         return result;
     if (wtemp != WAVE_FORMAT_PCM)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unsupported DLS sample format %04x\n", wtemp); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Unsupported DLS sample format %04x\n", wtemp); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -1212,7 +1212,7 @@ static EAS_RESULT Parse_fmt (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_WSM
         return result;
     if (wtemp != 1)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "No support for DLS multi-channel samples\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "No support for DLS multi-channel samples\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -1234,7 +1234,7 @@ static EAS_RESULT Parse_fmt (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_WSM
 
     if ((p->bitsPerSample != 8) && (p->bitsPerSample != 16))
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unsupported DLS bits-per-sample %d\n", p->bitsPerSample); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Unsupported DLS bits-per-sample %d\n", p->bitsPerSample); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -1522,14 +1522,14 @@ static EAS_RESULT Parse_ins (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_I
     /* must have an lrgn to be useful */
     if (!lrgnPos)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS ins chunk has no lrgn chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS ins chunk has no lrgn chunk\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
     /* must have an insh to be useful */
     if (!inshPos)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS ins chunk has no insh chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS ins chunk has no insh chunk\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -1612,12 +1612,12 @@ static EAS_RESULT Parse_insh (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_
     /* verify the parameters are valid */
     if (bank & 0x7fff8080)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS bank number is out of range: %08lx\n", bank); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS bank number is out of range: %08lx\n", bank); }
         bank &= 0xff7f;
     }
     if (program > 127)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS program number is out of range: %08lx\n", program); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS program number is out of range: %08lx\n", program); }
         program &= 0x7f;
     }
 
@@ -1667,7 +1667,7 @@ static EAS_RESULT Parse_lrgn (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_
         {
             if (regionCount == numRegions)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS region count exceeded cRegions value in insh, extra region ignored\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_WARNING, "DLS region count exceeded cRegions value in insh, extra region ignored\n"); }
                 return EAS_SUCCESS;
             }
             /* if second pass, ensure regionCount is less than numDLSRegions */
@@ -1784,14 +1784,14 @@ static EAS_RESULT Parse_rgn (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, EAS_I
     /* must have a rgnh chunk to be useful */
     if (!rgnhPos)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS rgn chunk has no rgnh chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS rgn chunk has no rgnh chunk\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
     /* must have a wlnk chunk to be useful */
     if (!wlnkPos)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "DLS rgn chunk has no wlnk chunk\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "DLS rgn chunk has no wlnk chunk\n"); }
         return EAS_ERROR_UNRECOGNIZED_FORMAT;
     }
 
@@ -1909,12 +1909,12 @@ static EAS_RESULT Parse_rgnh (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_DL
     /* check the range */
     if (lowKey > 127)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS rgnh: Low key out of range [%u]\n", lowKey); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS rgnh: Low key out of range [%u]\n", lowKey); }
         lowKey = 127;
     }
     if (highKey > 127)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS rgnh: High key out of range [%u]\n", lowKey); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS rgnh: High key out of range [%u]\n", lowKey); }
         highKey = 127;
     }
 
@@ -1927,12 +1927,12 @@ static EAS_RESULT Parse_rgnh (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_DL
     /* check the range */
     if (lowVel > 127)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS rgnh: Low velocity out of range [%u]\n", lowVel); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS rgnh: Low velocity out of range [%u]\n", lowVel); }
         lowVel = 127;
     }
     if (highVel > 127)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "DLS rgnh: High velocity out of range [%u]\n", highVel); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "DLS rgnh: High velocity out of range [%u]\n", highVel); }
         highVel = 127;
     }
 
@@ -2111,7 +2111,7 @@ static EAS_RESULT Parse_art (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 pos, S_DLS
             }
         }
         if (i == PARAM_TABLE_SIZE)
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "WARN: Unsupported parameter in DLS file\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "WARN: Unsupported parameter in DLS file\n"); }
     }
 
     return EAS_SUCCESS;
@@ -2413,7 +2413,7 @@ static EAS_RESULT Parse_cdl (SDLS_SYNTHESIZER_DATA *pDLSData, EAS_I32 size, EAS_
             x = QueryGUID(&dlsid, &y);
         }
         else
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unsupported opcode %d in DLS file\n", opcode); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "Unsupported opcode %d in DLS file\n", opcode); }
 
         /* push the result on the stack */
         if ((result = PushcdlStack(stack, &stackPtr, x)) != EAS_SUCCESS)

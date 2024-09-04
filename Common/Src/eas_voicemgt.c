@@ -215,7 +215,7 @@ static void IncVoicePoolCount (S_VOICE_MGR *pVoiceMgr, S_SYNTH_VOICE *pVoice)
     pSynth->poolCount[pool]++;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "IncVoicePoolCount: Synth=%d pool=%d\n", pSynth->vSynthNum, pool); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "IncVoicePoolCount: Synth=%d pool=%d\n", pSynth->vSynthNum, pool); }
 #endif
 }
 
@@ -248,7 +248,7 @@ static void DecVoicePoolCount (S_VOICE_MGR *pVoiceMgr, S_SYNTH_VOICE *pVoice)
     pSynth->poolCount[pool]--;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "DecVoicePoolCount: Synth=%d pool=%d\n", pSynth->vSynthNum, pool); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "DecVoicePoolCount: Synth=%d pool=%d\n", pSynth->vSynthNum, pool); }
 #endif
 }
 
@@ -276,7 +276,7 @@ EAS_RESULT VMInitialize (S_EAS_DATA *pEASData)
         pVoiceMgr = EAS_HWMalloc(pEASData->hwInstData, sizeof(S_VOICE_MGR));
     if (!pVoiceMgr)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitialize: Failed to allocate synthesizer memory\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitialize: Failed to allocate synthesizer memory\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
     EAS_HWMemSet(pVoiceMgr, 0, sizeof(S_VOICE_MGR));
@@ -336,7 +336,7 @@ EAS_RESULT VMInitMIDI (S_EAS_DATA *pEASData, S_SYNTH **ppSynth)
     {
         if (pEASData->pVoiceMgr->pSynth[0] != NULL)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI: No virtual synthesizer support for static memory model\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI: No virtual synthesizer support for static memory model\n"); }
             return EAS_ERROR_NO_VIRTUAL_SYNTHESIZER;
         }
 
@@ -353,7 +353,7 @@ EAS_RESULT VMInitMIDI (S_EAS_DATA *pEASData, S_SYNTH **ppSynth)
                 break;
         if (virtualSynthNum == MAX_VIRTUAL_SYNTHESIZERS)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI: Exceeded number of active virtual synthesizers"); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI: Exceeded number of active virtual synthesizers"); }
             return EAS_ERROR_NO_VIRTUAL_SYNTHESIZER;
         }
         pSynth = EAS_HWMalloc(pEASData->hwInstData, sizeof(S_SYNTH));
@@ -362,7 +362,7 @@ EAS_RESULT VMInitMIDI (S_EAS_DATA *pEASData, S_SYNTH **ppSynth)
     /* make sure we have a valid memory pointer */
     if (pSynth == NULL)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI: Failed to allocate synthesizer memory\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI: Failed to allocate synthesizer memory\n"); }
         return EAS_ERROR_MALLOC_FAILED;
     }
     EAS_HWMemSet(pSynth, 0, sizeof(S_SYNTH));
@@ -430,7 +430,7 @@ void VMReset (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_BOOL force)
 {
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMReset: request to reset synth. Force = %d\n", force); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMReset: request to reset synth. Force = %d\n", force); }
 #endif
 
     /* force voices to off state - may cause audio artifacts */
@@ -449,7 +449,7 @@ void VMReset (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_BOOL force)
         EAS_INT i;
 
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMReset: complete the reset process\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMReset: complete the reset process\n"); }
 #endif
 
         VMInitializeAllChannels(pVoiceMgr, pSynth);
@@ -653,7 +653,7 @@ void VMInitMIPTable (S_SYNTH *pSynth)
     EAS_INT i;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMInitMIPTable\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMInitMIPTable\n"); }
 #endif
 
     /* clear SP-MIDI flag */
@@ -676,7 +676,7 @@ void VMSetMIPEntry (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS
 {
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMSetMIPEntry: channel=%d, priority=%d, MIP=%d\n", channel, priority, mip); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMSetMIPEntry: channel=%d, priority=%d, MIP=%d\n", channel, priority, mip); }
 #endif
 
     /* save data for use by MIP message processing */
@@ -704,7 +704,7 @@ void VMMIPUpdateChannelMuting (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth)
     EAS_INT pool;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMUpdateMIPTable\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMUpdateMIPTable\n"); }
 #endif
 
     /* determine max polyphony */
@@ -795,7 +795,7 @@ void VMUpdateMIPTable (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth)
     EAS_INT priority[NUM_SYNTH_CHANNELS];
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMUpdateMIPTable\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMUpdateMIPTable\n"); }
 #endif
 
     /* set SP-MIDI flag */
@@ -865,7 +865,7 @@ void VMMuteAllVoices (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth)
     EAS_INT i;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMMuteAllVoices: about to mute all voices!!\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMMuteAllVoices: about to mute all voices!!\n"); }
 #endif
 
     for (i = 0; i < MAX_SYNTH_VOICES; i++)
@@ -941,8 +941,8 @@ void VMReleaseAllVoices (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth)
             case eVoiceStateInvalid:
             default:
 #ifdef _DEBUG_VM
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMReleaseAllVoices: error, %d is an unrecognized state\n",
-                    pVoiceMgr->voices[i].voiceState); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "VMReleaseAllVoices: error, %d is an unrecognized state\n",
+                    pVoiceMgr->voices[i].voiceState); }
 #endif
                 break;
         }
@@ -974,8 +974,8 @@ void VMAllNotesOff (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel)
 #ifdef _DEBUG_VM
     if (channel >= NUM_SYNTH_CHANNELS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMAllNotesOff: error, %d invalid channel number\n",
-            channel); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMAllNotesOff: error, %d invalid channel number\n",
+            channel); }
         return;
     }
 #endif
@@ -1054,15 +1054,15 @@ void VMDeferredStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth)
                 deferredNoteOff = EAS_TRUE;
 
 #ifdef _DEBUG_VM
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMDeferredStopNote: defer request to stop voice %d (channel=%d note=%d) - voice not started\n",
+                { EAS_Report(_EAS_SEVERITY_INFO, "VMDeferredStopNote: defer request to stop voice %d (channel=%d note=%d) - voice not started\n",
                     voiceNum,
                     pVoiceMgr->voices[voiceNum].nextChannel,
-                    pVoiceMgr->voices[voiceNum].note); */ }
+                    pVoiceMgr->voices[voiceNum].note); }
 
                 /* sanity check: this stolen voice better be ramped to zero */
                 if (0 != pVoiceMgr->voices[voiceNum].gain)
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMDeferredStopNote: warning, this voice did not complete its ramp to zero\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_INFO, "VMDeferredStopNote: warning, this voice did not complete its ramp to zero\n"); }
                 }
 #endif  // #ifdef _DEBUG_VM
 
@@ -1074,10 +1074,10 @@ void VMDeferredStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth)
                     VOICE_FLAG_DEFER_MIDI_NOTE_OFF;
 
 #ifdef _DEBUG_VM
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMDeferredStopNote: Stop voice %d (channel=%d note=%d)\n",
+                { EAS_Report(_EAS_SEVERITY_INFO, "VMDeferredStopNote: Stop voice %d (channel=%d note=%d)\n",
                     voiceNum,
                     pVoiceMgr->voices[voiceNum].nextChannel,
-                    pVoiceMgr->voices[voiceNum].note); */ }
+                    pVoiceMgr->voices[voiceNum].note); }
 #endif
 
                 channel = pVoiceMgr->voices[voiceNum].channel & 15;
@@ -1134,8 +1134,8 @@ void VMReleaseAllDeferredNoteOffs (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_
 #ifdef _DEBUG_VM
     if (channel >= NUM_SYNTH_CHANNELS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMReleaseAllDeferredNoteOffs: error, %d invalid channel number\n",
-            channel); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMReleaseAllDeferredNoteOffs: error, %d invalid channel number\n",
+            channel); }
         return;
     }
 #endif  /* #ifdef _DEBUG_VM */
@@ -1194,8 +1194,8 @@ void VMCatchNotesForSustainPedal (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U
 #ifdef _DEBUG_VM
     if (channel >= NUM_SYNTH_CHANNELS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMCatchNotesForSustainPedal: error, %d invalid channel number\n",
-            channel); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMCatchNotesForSustainPedal: error, %d invalid channel number\n",
+            channel); }
         return;
     }
 #endif
@@ -1310,7 +1310,7 @@ static void VMFreeVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNTH_VOICE 
     /* do nothing if voice is already free */
     if (pVoice->voiceState == eVoiceStateFree)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "VMFreeVoice: Attempt to free voice that is already free\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "VMFreeVoice: Attempt to free voice that is already free\n"); }
         return;
     }
 
@@ -1320,7 +1320,7 @@ static void VMFreeVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNTH_VOICE 
 
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "VMFreeVoice: Synth=%d\n", pSynth->vSynthNum); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "VMFreeVoice: Synth=%d\n", pSynth->vSynthNum); }
 #endif
 
     /* return to free voice pool */
@@ -1329,7 +1329,7 @@ static void VMFreeVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, S_SYNTH_VOICE 
     InitVoice(pVoice);
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMFreeVoice: free voice %d\n", pVoice - pVoiceMgr->voices); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMFreeVoice: free voice %d\n", pVoice - pVoiceMgr->voices); }
 #endif
 
     /* all notes older than this one get "younger" */
@@ -1365,11 +1365,11 @@ static EAS_BOOL VMRetargetStolenVoice (S_VOICE_MGR *pVoiceMgr, EAS_I32 voiceNum)
     pNextSynth = pVoiceMgr->pSynth[GET_VSYNTH(pVoice->nextChannel)];
 
 #ifdef _DEBUG_VM
-{ /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMRetargetStolenVoice: retargeting stolen voice %d on channel %d\n",
-        voiceNum, pVoice->channel); */ }
+{ EAS_Report(_EAS_SEVERITY_INFO, "VMRetargetStolenVoice: retargeting stolen voice %d on channel %d\n",
+        voiceNum, pVoice->channel); }
 
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\to channel %d note: %d velocity: %d\n",
-        pVoice->nextChannel, pVoice->nextNote, pVoice->nextVelocity); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\to channel %d note: %d velocity: %d\n",
+        pVoice->nextChannel, pVoice->nextNote, pVoice->nextVelocity); }
 #endif
 
     /* make sure new channel hasn't been muted by SP-MIDI since the voice was stolen */
@@ -1384,7 +1384,7 @@ static EAS_BOOL VMRetargetStolenVoice (S_VOICE_MGR *pVoiceMgr, EAS_I32 voiceNum)
     if (pVoice->channel != pVoice->nextChannel)
     {
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMRetargetStolenVoice: Note assigned to different virtual synth, adjusting numActiveVoices\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMRetargetStolenVoice: Note assigned to different virtual synth, adjusting numActiveVoices\n"); }
 #endif
         pSynth->numActiveVoices--;
         pNextSynth->numActiveVoices++;
@@ -1416,7 +1416,7 @@ static EAS_BOOL VMRetargetStolenVoice (S_VOICE_MGR *pVoiceMgr, EAS_I32 voiceNum)
     if (flags & VOICE_FLAG_DEFER_MIDI_NOTE_OFF)
     {
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMRetargetVoice: stolen note note-off request deferred\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMRetargetVoice: stolen note note-off request deferred\n"); }
 #endif
         pVoice->voiceFlags |= VOICE_FLAG_DEFER_MIDI_NOTE_OFF;
         pNextSynth->synthFlags |= SYNTH_FLAG_DEFERRED_MIDI_NOTE_OFF_PENDING;
@@ -1455,7 +1455,7 @@ void VMCheckKeyGroup (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U16 keyGroup,
                 if (keyGroup == (pRegion->keyGroupAndFlags & 0x0f00))
                 {
 #ifdef _DEBUG_VM
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMCheckKeyGroup: voice %d matches key group %d\n", voiceNum, keyGroup >> 8); */ }
+                    { EAS_Report(_EAS_SEVERITY_INFO, "VMCheckKeyGroup: voice %d matches key group %d\n", voiceNum, keyGroup >> 8); }
 #endif
 
                     /* if this voice was just started, set it to mute on the next buffer */
@@ -1480,7 +1480,7 @@ void VMCheckKeyGroup (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U16 keyGroup,
                 if (keyGroup == (pRegion->keyGroupAndFlags & 0x0f00))
                 {
 #ifdef _DEBUG_VM
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMCheckKeyGroup: voice %d matches key group %d\n", voiceNum, keyGroup >> 8); */ }
+                    { EAS_Report(_EAS_SEVERITY_INFO, "VMCheckKeyGroup: voice %d matches key group %d\n", voiceNum, keyGroup >> 8); }
 #endif
 
                     /* if this voice was just started, set it to mute on the next buffer */
@@ -1577,15 +1577,15 @@ EAS_BOOL VMCheckPolyphonyLimiting (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_
     if (oldestVoiceNum != MAX_SYNTH_VOICES)
     {
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMCheckPolyphonyLimiting: voice %d has the oldest note\n", oldestVoiceNum); */ }
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "VMCheckPolyphonyLimiting: polyphony limiting requires shutting down note %d \n", pVoiceMgr->voices[oldestVoiceNum].note); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMCheckPolyphonyLimiting: voice %d has the oldest note\n", oldestVoiceNum); }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "VMCheckPolyphonyLimiting: polyphony limiting requires shutting down note %d \n", pVoiceMgr->voices[oldestVoiceNum].note); }
 #endif
         VMStolenVoice(pVoiceMgr, pSynth, oldestVoiceNum, channel, note, velocity, regionIndex);
         return EAS_TRUE;
     }
 
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "VMCheckPolyphonyLimiting: No oldest voice to steal\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "VMCheckPolyphonyLimiting: No oldest voice to steal\n"); }
 #endif
     return EAS_FALSE;
 }
@@ -1665,7 +1665,7 @@ void VMStartVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_
         S_SYNTH_VOICE *pVoice = &pVoiceMgr->voices[voiceNum];
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "VMStartVoice: Synth=%d\n", pSynth->vSynthNum); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "VMStartVoice: Synth=%d\n", pSynth->vSynthNum); }
 #endif
 
         /* bump voice counts */
@@ -1673,8 +1673,8 @@ void VMStartVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_
         pSynth->numActiveVoices++;
 
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStartVoice: voice %d assigned to channel %d note %d velocity %d\n",
-            voiceNum, channel, note, velocity); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMStartVoice: voice %d assigned to channel %d note %d velocity %d\n",
+            voiceNum, channel, note, velocity); }
 #endif
 
         /* save parameters */
@@ -1704,8 +1704,8 @@ void VMStartVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_
 #ifdef _DEBUG_VM
     else
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStartVoice: Could not steal a voice for channel %d note %d velocity %d\n",
-            channel, note, velocity); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMStartVoice: Could not steal a voice for channel %d note %d velocity %d\n",
+            channel, note, velocity); }
     }
 #endif
 
@@ -1890,8 +1890,8 @@ void VMStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_U8
             if ((channel == pVoiceMgr->voices[voiceNum].channel) && (note == pVoiceMgr->voices[voiceNum].note))
             {
 #ifdef _DEBUG_VM
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStopNote: voice %d channel %d note %d\n",
-                    voiceNum, channel, note); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "VMStopNote: voice %d channel %d note %d\n",
+                    voiceNum, channel, note); }
 #endif
 
                 /* if sustain pedal is down, set deferred note-off flag */
@@ -1905,7 +1905,7 @@ void VMStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_U8
                 if (pVoiceMgr->voices[voiceNum].voiceFlags & VOICE_FLAG_NO_SAMPLES_SYNTHESIZED_YET)
                 {
 #ifdef _DEBUG_VM
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tDeferred: Not started yet\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_INFO, "\tDeferred: Not started yet\n"); }
 #endif
                     pVoiceMgr->voices[voiceNum].voiceFlags |= VOICE_FLAG_DEFER_MIDI_NOTE_OFF;
                     pSynth->synthFlags |= SYNTH_FLAG_DEFERRED_MIDI_NOTE_OFF_PENDING;
@@ -1923,8 +1923,8 @@ void VMStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_U8
         {
 
 #ifdef _DEBUG_VM
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStopNote: voice %d channel %d note %d\n\tDeferred: Stolen voice\n",
-                voiceNum, channel, note); */ }
+            { EAS_Report(_EAS_SEVERITY_INFO, "VMStopNote: voice %d channel %d note %d\n\tDeferred: Stolen voice\n",
+                voiceNum, channel, note); }
 #endif
             pVoiceMgr->voices[voiceNum].voiceFlags |= VOICE_FLAG_DEFER_MIDI_NOTE_OFF;
         }
@@ -1965,7 +1965,7 @@ EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_INT *pVoiceNumber, 
     *pVoiceNumber = UNASSIGNED_SYNTH_VOICE;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMFindAvailableVoice: error, could not find an available voice\n"); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMFindAvailableVoice: error, could not find an available voice\n"); }
 #endif
     return EAS_FAILURE;
 }
@@ -2040,7 +2040,7 @@ EAS_RESULT VMStealVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_INT *pVoic
         if (pSynth->priority > pCurrSynth->priority)
             continue;
 #ifdef _DEBUG_VM
-//      { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStealVoice: New priority = %d exceeds old priority = %d\n", pSynth->priority, pCurrSynth->priority); */ }
+//      { EAS_Report(_EAS_SEVERITY_INFO, "VMStealVoice: New priority = %d exceeds old priority = %d\n", pSynth->priority, pCurrSynth->priority); }
 #endif
 
         /* if voice is stolen or just started, reduce the likelihood it will be stolen */
@@ -2087,21 +2087,21 @@ EAS_RESULT VMStealVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_INT *pVoic
     /* may happen if all voices are allocated to a higher priority virtual synth */
     if (bestCandidate == MAX_SYNTH_VOICES)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStealVoice: Unable to allocate a voice\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMStealVoice: Unable to allocate a voice\n"); }
         return EAS_ERROR_NO_VOICE_ALLOCATED;
     }
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMStealVoice: Voice %d stolen\n", bestCandidate); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "VMStealVoice: Voice %d stolen\n", bestCandidate); }
 
     /* are we stealing a stolen voice? */
     if (pVoiceMgr->voices[bestCandidate].voiceState == eVoiceStateStolen)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "VMStealVoice: Voice %d is already marked as stolen and was scheduled to play ch: %d note: %d vel: %d\n",
+        { EAS_Report(_EAS_SEVERITY_WARNING, "VMStealVoice: Voice %d is already marked as stolen and was scheduled to play ch: %d note: %d vel: %d\n",
             bestCandidate,
             pVoiceMgr->voices[bestCandidate].nextChannel,
             pVoiceMgr->voices[bestCandidate].nextNote,
-            pVoiceMgr->voices[bestCandidate].nextVelocity); */ }
+            pVoiceMgr->voices[bestCandidate].nextVelocity); }
     }
 #endif
 
@@ -2215,7 +2215,7 @@ void VMControlChange (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, E
     {
     case MIDI_CONTROLLER_BANK_SELECT_MSB:
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMControlChange: Bank Select MSB: msb 0x%X\n", value); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMControlChange: Bank Select MSB: msb 0x%X\n", value); }
 #endif
         /* use this MSB with a zero LSB, until we get an LSB message */
         pChannel->bankNum = value << 8;
@@ -2243,7 +2243,7 @@ void VMControlChange (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, E
 
     case MIDI_CONTROLLER_BANK_SELECT_LSB:
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMControlChange: Bank Select LSB: lsb 0x%X\n", value); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMControlChange: Bank Select LSB: lsb 0x%X\n", value); }
 #endif
         /*
         construct bank number as 7-bits (stored as 8) of existing MSB
@@ -2372,7 +2372,7 @@ void VMControlChange (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, E
 
     default:
 #ifdef _DEBUG_VM
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMControlChange: controller %d not yet implemented\n", controller); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMControlChange: controller %d not yet implemented\n", controller); }
 #endif
         break;
 
@@ -2415,8 +2415,8 @@ EAS_RESULT VMUpdateRPNStateMachine (S_SYNTH *pSynth, EAS_U8 channel, EAS_U8 cont
 #ifdef _DEBUG_VM
     if (channel >= NUM_SYNTH_CHANNELS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMUpdateRPNStateMachines: error, %d invalid channel number\n",
-            channel); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "VMUpdateRPNStateMachines: error, %d invalid channel number\n",
+            channel); }
         return EAS_FAILURE;
     }
 #endif
@@ -2680,7 +2680,7 @@ void VMProgramChange (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, E
     EAS_U16 regionIndex;
 
 #ifdef _DEBUG_VM
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "VMProgramChange: vSynthNum=%d, channel=%d, program=%d\n", pSynth->vSynthNum, channel, program); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "VMProgramChange: vSynthNum=%d, channel=%d, program=%d\n", pSynth->vSynthNum, channel, program); }
 #endif
 
     /* setup pointer to MIDI channel data */
@@ -2739,8 +2739,8 @@ void VMProgramChange (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, E
             /* switch to program 0 in the default bank */
             {
                 if (VMFindProgram(pSynth->pEAS, bank, 0, &regionIndex) != EAS_SUCCESS)
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "VMProgramChange: No program @ %03d:%03d:%03d\n",
-                        (bank >> 8) & 0x7f, bank & 0x7f, program); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "VMProgramChange: No program @ %03d:%03d:%03d\n",
+                        (bank >> 8) & 0x7f, bank & 0x7f, program); }
             }
         }
     }
@@ -2899,7 +2899,7 @@ EAS_RESULT VMRender (S_VOICE_MGR *pVoiceMgr, EAS_I32 numSamples, EAS_I32 *pMixBu
             all voices have muted
             */
 #ifdef _DEBUG_VM
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "VMAddSamples: complete the reset process\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_INFO, "VMAddSamples: complete the reset process\n"); }
 #endif
 
             VMInitializeAllChannels(pVoiceMgr, pSynth);
@@ -3121,7 +3121,7 @@ EAS_RESULT VMSetPolyphony (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_I32 poly
         /* shutdown best candidate */
         if (bestCandidate < 0)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "VMSetPolyphony: Unable to reduce polyphony\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING, "VMSetPolyphony: Unable to reduce polyphony\n"); }
             break;
         }
 
@@ -3206,16 +3206,16 @@ EAS_RESULT VMValidateEASLib (EAS_SNDLIB_HANDLE pEAS)
     {
         if (pEAS->identifier != _EAS_LIBRARY_VERSION)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Sound library mismatch in sound library: Read 0x%08x, expected 0x%08x\n",
-                pEAS->identifier, _EAS_LIBRARY_VERSION); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Sound library mismatch in sound library: Read 0x%08x, expected 0x%08x\n",
+                pEAS->identifier, _EAS_LIBRARY_VERSION); }
             return EAS_ERROR_SOUND_LIBRARY;
         }
 
         /* check sample rate */
         if ((pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK) != _OUTPUT_SAMPLE_RATE)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Sample rate mismatch in sound library: Read %lu, expected %lu\n",
-                pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK, _OUTPUT_SAMPLE_RATE); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Sample rate mismatch in sound library: Read %lu, expected %lu\n",
+                pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK, _OUTPUT_SAMPLE_RATE); }
             return EAS_ERROR_SOUND_LIBRARY;
         }
 
@@ -3224,16 +3224,16 @@ EAS_RESULT VMValidateEASLib (EAS_SNDLIB_HANDLE pEAS)
 #ifdef _8_BIT_SAMPLES
         if (pEAS->libAttr & LIB_FORMAT_16_BIT_SAMPLES)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Expected 8-bit samples and found 16-bit\n",
-                pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK, _OUTPUT_SAMPLE_RATE); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Expected 8-bit samples and found 16-bit\n",
+                pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK, _OUTPUT_SAMPLE_RATE); }
             return EAS_ERROR_SOUND_LIBRARY;
         }
 #endif
 #ifdef _16_BIT_SAMPLES
         if ((pEAS->libAttr & LIB_FORMAT_16_BIT_SAMPLES) == 0)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Expected 16-bit samples and found 8-bit\n",
-                pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK, _OUTPUT_SAMPLE_RATE); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMValidateEASLib: Expected 16-bit samples and found 8-bit\n",
+                pEAS->libAttr & LIBFORMAT_SAMPLE_RATE_MASK, _OUTPUT_SAMPLE_RATE); }
             return EAS_ERROR_SOUND_LIBRARY;
         }
 #endif
@@ -3351,7 +3351,7 @@ void VMMIDIShutdown (S_EAS_DATA *pEASData, S_SYNTH *pSynth)
     {
         EAS_RESULT result;
         if ((result = DLSCleanup(pEASData->hwInstData, pSynth->pDLS)) != EAS_SUCCESS)
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMMIDIShutdown: Error %ld cleaning up DLS collection\n", result); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMMIDIShutdown: Error %ld cleaning up DLS collection\n", result); }
         pSynth->pDLS = NULL;
     }
 #endif
@@ -3525,7 +3525,7 @@ EAS_RESULT VMSanityCheck (EAS_DATA_HANDLE pEASData)
             vSynthNum = GET_VSYNTH(pVoice->channel);
             if (vSynthNum >= MAX_VIRTUAL_SYNTHESIZERS)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMSanityCheck: Voice %d has invalid virtual synth number %d\n", i, vSynthNum); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "VMSanityCheck: Voice %d has invalid virtual synth number %d\n", i, vSynthNum); }
                 result = EAS_FAILURE;
                 continue;
             }
@@ -3542,7 +3542,7 @@ EAS_RESULT VMSanityCheck (EAS_DATA_HANDLE pEASData)
                     vSynthNum = GET_VSYNTH(pVoice->nextChannel);
                     if (vSynthNum >= MAX_VIRTUAL_SYNTHESIZERS)
                     {
-                        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMSanityCheck: Voice %d has invalid virtual synth number %d\n", i, vSynthNum); */ }
+                        { EAS_Report(_EAS_SEVERITY_ERROR, "VMSanityCheck: Voice %d has invalid virtual synth number %d\n", i, vSynthNum); }
                         result = EAS_FAILURE;
                         continue;
                     }
@@ -3566,7 +3566,7 @@ EAS_RESULT VMSanityCheck (EAS_DATA_HANDLE pEASData)
                     break;
 
                 default:
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMSanityCheck : voice %d in invalid state\n", i); */ }
+                    { EAS_Report(_EAS_SEVERITY_ERROR, "VMSanityCheck : voice %d in invalid state\n", i); }
                     result = EAS_FAILURE;
                     break;
             }
@@ -3578,17 +3578,17 @@ EAS_RESULT VMSanityCheck (EAS_DATA_HANDLE pEASData)
     }
 
     /* dump state info */
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "%d free\n", freeVoices); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "%d active\n", activeVoices); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "%d playing\n", playingVoices); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "%d releasing\n", releasingVoices); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "%d muting\n", mutingVoices); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "%d stolen\n", stolenVoices); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "%d free\n", freeVoices); }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "%d active\n", activeVoices); }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "%d playing\n", playingVoices); }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "%d releasing\n", releasingVoices); }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "%d muting\n", mutingVoices); }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "%d stolen\n", stolenVoices); }
 
     if (pEASData->pVoiceMgr->activeVoices != activeVoices)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Active voice mismatch was %d should be %d\n",
-            pEASData->pVoiceMgr->activeVoices, activeVoices); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Active voice mismatch was %d should be %d\n",
+            pEASData->pVoiceMgr->activeVoices, activeVoices); }
         result = EAS_FAILURE;
     }
 
@@ -3598,18 +3598,18 @@ EAS_RESULT VMSanityCheck (EAS_DATA_HANDLE pEASData)
         if (pEASData->pVoiceMgr->pSynth[i] == NULL)
             continue;
 
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Synth %d numActiveVoices: %d\n", i, pEASData->pVoiceMgr->pSynth[i]->numActiveVoices); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "Synth %d numActiveVoices: %d\n", i, pEASData->pVoiceMgr->pSynth[i]->numActiveVoices); }
         if (pEASData->pVoiceMgr->pSynth[i]->numActiveVoices > MAX_SYNTH_VOICES)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMSanityCheck: Synth %d illegal count for numActiveVoices: %d\n", i, pEASData->pVoiceMgr->pSynth[i]->numActiveVoices); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "VMSanityCheck: Synth %d illegal count for numActiveVoices: %d\n", i, pEASData->pVoiceMgr->pSynth[i]->numActiveVoices); }
             result = EAS_FAILURE;
         }
         for (j = 0; j < NUM_SYNTH_CHANNELS; j++)
         {
             if (poolCount[i][j] != pEASData->pVoiceMgr->pSynth[i]->poolCount[j])
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Pool count mismatch synth %d pool %d, was %d, should be %d\n",
-                    i, j, pEASData->pVoiceMgr->pSynth[i]->poolCount[j], poolCount[i][j]); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "Pool count mismatch synth %d pool %d, was %d, should be %d\n",
+                    i, j, pEASData->pVoiceMgr->pSynth[i]->poolCount[j], poolCount[i][j]); }
                 result = EAS_FAILURE;
             }
         }

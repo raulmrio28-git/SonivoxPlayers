@@ -198,8 +198,8 @@ static EAS_BOOL FM_SynthIsOutputOperator (const S_FM_REGION *pRegion, EAS_INT op
             break;
 
         default:
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL,"Invalid voice mode: %d",
-                pRegion->region.keyGroupAndFlags & 7); */ }
+            { EAS_Report(_EAS_SEVERITY_FATAL,"Invalid voice mode: %d",
+                pRegion->region.keyGroupAndFlags & 7); }
     }
 
     return EAS_FALSE;
@@ -700,7 +700,7 @@ static EAS_BOOL FM_UpdateEG (S_SYNTH_VOICE *pVoice, S_OPERATOR *pOper, const S_F
             done = EAS_TRUE;
             break;
         default:
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL,"Invalid operator state: %d", pOper->envState); */ }
+            { EAS_Report(_EAS_SEVERITY_FATAL,"Invalid operator state: %d", pOper->envState); }
     } /* end switch (pOper->m_eState) */
 
     return done;

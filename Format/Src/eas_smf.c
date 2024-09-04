@@ -197,7 +197,7 @@ EAS_RESULT SMF_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     /* instantiate a synthesizer */
     if ((result = VMInitMIDI(pEASData, &pSMFData->pSynth)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); }
         return result;
     }
 
@@ -239,12 +239,12 @@ EAS_RESULT SMF_Time (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_U32 *pTim
 #ifdef _CHECKED_BUILD
     if (pSMFData->state == EAS_STATE_STOPPED)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Can't ask for time on a stopped stream\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Can't ask for time on a stopped stream\n"); }
     }
 
     if (pSMFData->nextStream == NULL)
     {
-        { /* dpp: EAS_ReportEx( _EAS_SEVERITY_ERROR, "no is NULL\n"); */ }
+        { EAS_Report( _EAS_SEVERITY_ERROR, "no is NULL\n"); }
     }
 #endif
 
@@ -871,7 +871,7 @@ static EAS_RESULT SMF_ParseMetaEvent (S_EAS_DATA *pEASData, S_SMF_DATA *pSMFData
     /* end of track? */
     if (c == SMF_META_END_OF_TRACK)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Meta-event: end of track\n", c, len); */ }
+        { EAS_Report(_EAS_SEVERITY_DETAIL, "Meta-event: end of track\n", c, len); }
         pSMFStream->ticks = SMF_END_OF_TRACK;
     }
 
@@ -949,7 +949,7 @@ static EAS_RESULT SMF_ParseMetaEvent (S_EAS_DATA *pEASData, S_SMF_DATA *pSMFData
     if ((result = EAS_HWFileSeek(pEASData->hwInstData, pSMFStream->fileHandle, pos)) != EAS_SUCCESS)
         return result;
 
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Meta-event: type=%02x, len=%d\n", c, len); */ }
+    { EAS_Report(_EAS_SEVERITY_DETAIL, "Meta-event: type=%02x, len=%d\n", c, len); }
     return EAS_SUCCESS;
 }
 
@@ -1126,7 +1126,7 @@ EAS_RESULT SMF_ParseHeader (EAS_HW_DATA_HANDLE hwInstData, S_SMF_DATA *pSMFData)
     /* limit the number of tracks */
     if (numStreams > MAX_SMF_STREAMS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "SMF file contains %u tracks, playing %d tracks\n", numStreams, MAX_SMF_STREAMS); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING, "SMF file contains %u tracks, playing %d tracks\n", numStreams, MAX_SMF_STREAMS); }
         numStreams = MAX_SMF_STREAMS;
     } else if (numStreams == 0)
     {
@@ -1141,7 +1141,7 @@ EAS_RESULT SMF_ParseHeader (EAS_HW_DATA_HANDLE hwInstData, S_SMF_DATA *pSMFData)
     /* setup default timebase for 120 bpm */
     pSMFData->ppqn = 192;
     if (!division || division & 0x8000)
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING,"No support for SMPTE code timebase\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_WARNING,"No support for SMPTE code timebase\n"); }
     else
         pSMFData->ppqn = (division & 0x7fff);
     pSMFData->tickConv = (EAS_U16) (((SMF_DEFAULT_TIMEBASE * 1024) / pSMFData->ppqn + 500) / 1000);
@@ -1172,7 +1172,7 @@ EAS_RESULT SMF_ParseHeader (EAS_HW_DATA_HANDLE hwInstData, S_SMF_DATA *pSMFData)
             temp = chunkStart + SMF_CHUNK_INFO_SIZE + chunkSize;
             if (temp <= chunkStart)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING,"Error in chunk size at offset %d\n", chunkStart); */ }
+                { EAS_Report(_EAS_SEVERITY_WARNING,"Error in chunk size at offset %d\n", chunkStart); }
                 return EAS_ERROR_FILE_FORMAT;
             }
             chunkStart = temp;
@@ -1193,7 +1193,7 @@ EAS_RESULT SMF_ParseHeader (EAS_HW_DATA_HANDLE hwInstData, S_SMF_DATA *pSMFData)
             if (temp == SMF_CHUNK_TYPE_TRACK)
                 break;
 
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING,"Unexpected chunk type: 0x%08x\n", temp); */ }
+            { EAS_Report(_EAS_SEVERITY_WARNING,"Unexpected chunk type: 0x%08x\n", temp); }
         }
 
         /* initalize some data */

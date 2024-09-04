@@ -208,7 +208,7 @@ static EAS_RESULT OTA_CheckFileType (S_EAS_DATA *pEASData, EAS_FILE_HANDLE fileH
                     pData = EAS_HWMalloc(pEASData->hwInstData, sizeof(S_OTA_DATA));
                 if (!pData)
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Malloc failed in OTA_Prepare\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_ERROR, "Malloc failed in OTA_Prepare\n"); }
                     return EAS_ERROR_MALLOC_FAILED;
                 }
                 EAS_HWMemSet(pData, 0, sizeof(S_OTA_DATA));
@@ -262,7 +262,7 @@ static EAS_RESULT OTA_Prepare (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData)
     /* instantiate a synthesizer */
     if ((result = VMInitMIDI(pEASData, &pData->pSynth)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "VMInitMIDI returned %d\n", result); }
         return result;
     }
 
@@ -395,7 +395,7 @@ static EAS_RESULT OTA_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                 return result;
             if (temp != OTA_PATTERN_HEADER_ID)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Expected OTA pattern header\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "Expected OTA pattern header\n"); }
                 return EAS_ERROR_FILE_FORMAT;
             }
 
@@ -424,7 +424,7 @@ static EAS_RESULT OTA_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                 /* make sure it's a valid pattern */
                 if (pData->patterns[pData->currentPattern].fileOffset < 0)
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "OTA pattern error, invalid pattern specified\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_ERROR, "OTA pattern error, invalid pattern specified\n"); }
                     return EAS_ERROR_FILE_FORMAT;
                 }
 
@@ -486,7 +486,7 @@ static EAS_RESULT OTA_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                     break;
 
                 default:
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unrecognized note duration ignored\n"); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Unrecognized note duration ignored\n"); }
                     break;
             }
 
@@ -507,7 +507,7 @@ static EAS_RESULT OTA_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
                         pData->restTicks = duration >> 1;
                         break;
                     default:
-                        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unrecognized note style ignored\n"); */ }
+                        { EAS_Report(_EAS_SEVERITY_WARNING, "Unrecognized note style ignored\n"); }
                 }
 
                 /* add octave */
@@ -550,7 +550,7 @@ static EAS_RESULT OTA_Event (S_EAS_DATA *pEASData, EAS_VOID_PTR pInstData, EAS_I
             break;
 
         default:
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unexpected instruction ID in OTA stream\n"); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Unexpected instruction ID in OTA stream\n"); }
             return EAS_ERROR_FILE_FORMAT;
     }
 
@@ -899,7 +899,7 @@ static EAS_RESULT OTA_ParseHeader (S_EAS_DATA *pEASData, S_OTA_DATA* pData)
         {
             if (temp != OTA_RINGTONE)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Expected OTA Ring Tone Programming type\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "Expected OTA Ring Tone Programming type\n"); }
                 return EAS_ERROR_FILE_FORMAT;
             }
             state++;
@@ -914,7 +914,7 @@ static EAS_RESULT OTA_ParseHeader (S_EAS_DATA *pEASData, S_OTA_DATA* pData)
                 pData->flags |= OTA_FLAGS_UNICODE;
             else
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Expected OTA Sound or Unicode type\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "Expected OTA Sound or Unicode type\n"); }
                 return EAS_ERROR_FILE_FORMAT;
             }
         }
@@ -962,7 +962,7 @@ static EAS_RESULT OTA_ParseHeader (S_EAS_DATA *pEASData, S_OTA_DATA* pData)
     /* must be temporary song */
     else if (temp != OTA_TEMPORARY_SONG_TYPE)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Expected OTA basic or temporary song type\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "Expected OTA basic or temporary song type\n"); }
         return EAS_ERROR_FILE_FORMAT;
     }
 
@@ -973,7 +973,7 @@ static EAS_RESULT OTA_ParseHeader (S_EAS_DATA *pEASData, S_OTA_DATA* pData)
     /* sanity check */
     if (pData->numPatterns == 0)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "OTA number of patterns is zero\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "OTA number of patterns is zero\n"); }
         return EAS_ERROR_FILE_FORMAT;
     }
 

@@ -168,7 +168,7 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
         StrCopy(waveFilename, filename, sizeof(waveFilename));
         if (!ChangeFileExt(waveFilename, "wav", sizeof(waveFilename)))
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Error in output filename %s\n", waveFilename); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Error in output filename %s\n", waveFilename); }
             return EAS_FAILURE;
         }
         outputFile = waveFilename;
@@ -178,21 +178,21 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
     //if ((reportResult = EAS_OpenFile(easData, filename, &handle)) != EAS_SUCCESS)
     if ((reportResult = EAS_OpenFile(easData, &fLocator, &handle)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_OpenFile returned %ld\n", reportResult); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_OpenFile returned %ld\n", reportResult); }
         return reportResult;
     }
 
     /* prepare to play the file */
     if ((result = EAS_Prepare(easData, handle)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_Prepare returned %ld\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_Prepare returned %ld\n", result); }
         reportResult = result;
     }
 
     /* get play length */
     if ((result = EAS_ParseMetaData(easData, handle, &playTime)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_ParseMetaData returned %ld\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_ParseMetaData returned %ld\n", result); }
         return result;
     }
     EAS_ReportEx(_EAS_SEVERITY_NOFILTER, 0xe624f4d9, 0x00000005 , playTime / 1000, playTime % 1000);
@@ -203,7 +203,7 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
         wFile = WaveFileCreate(outputFile, pLibConfig->numChannels, pLibConfig->sampleRate, sizeof(EAS_PCM) * 8);
         if (!wFile)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Unable to create output file %s\n", waveFilename); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Unable to create output file %s\n", waveFilename); }
             reportResult = EAS_FAILURE;
         }
     }
@@ -219,17 +219,17 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
             /* get the current time */
             if ((result = EAS_GetLocation(easData, handle, &playTime)) != EAS_SUCCESS)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_GetLocation returned %d\n",result); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_GetLocation returned %d\n",result); }
                 if (reportResult == EAS_SUCCESS)
                     reportResult = result;
                 break;
             }
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_DETAIL, "Parser time: %d.%03d\n", playTime / 1000, playTime % 1000); */ }
+            { EAS_Report(_EAS_SEVERITY_DETAIL, "Parser time: %d.%03d\n", playTime / 1000, playTime % 1000); }
 
             /* render a buffer of audio */
             if ((result = EAS_Render(easData, p, pLibConfig->mixBufferSize, &count)) != EAS_SUCCESS)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_Render returned %d\n",result); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_Render returned %d\n",result); }
                 if (reportResult == EAS_SUCCESS)
                     reportResult = result;
             }
@@ -240,7 +240,7 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
             /* write it to the wave file */
             if (WaveFileWrite(wFile, buffer, bufferSize) != bufferSize)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "WaveFileWrite failed\n"); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "WaveFileWrite failed\n"); }
                 reportResult = EAS_FAILURE;
             }
         }
@@ -250,7 +250,7 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
             /* check stream state */
             if ((result = EAS_State(easData, handle, &state)) != EAS_SUCCESS)
             {
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_State returned %d\n", result); */ }
+                { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_State returned %d\n", result); }
                 reportResult = result;
             }
 
@@ -265,7 +265,7 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
     {
         if (!WaveFileClose(wFile))
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Error closing wave file %s\n", waveFilename); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Error closing wave file %s\n", waveFilename); }
             if (reportResult == EAS_SUCCESS)
                 result = EAS_FAILURE;
         }
@@ -274,7 +274,7 @@ static EAS_RESULT PlayFile (EAS_DATA_HANDLE easData, const char* filename, const
     /* close the input file */
     if ((result = EAS_CloseFile(easData,handle)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "EAS_Close returned %ld\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_ERROR, "EAS_Close returned %ld\n", result); }
         if (reportResult == EAS_SUCCESS)
             result = EAS_FAILURE;
     }
@@ -308,7 +308,11 @@ int main( int argc, char **argv )
     char *outputFile = NULL;
 
     /* set the error reporting level */
+#ifndef _DEBUG
     EAS_SetDebugLevel(_EAS_SEVERITY_INFO);
+#else
+	EAS_SetDebugLevel(_EAS_SEVERITY_DETAIL);
+#endif
     debugFile = NULL;
 
     /* process command-line arguments */
@@ -324,11 +328,11 @@ int main( int argc, char **argv )
                 if ((temp >= '0') || (temp <= '9'))
                     EAS_SetDebugLevel(temp);
                 else
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Invalid debug level %d\n", temp); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Invalid debug level %d\n", temp); }
                 break;
             case 'f':
                 if ((debugFile = fopen(&argv[i][2],"w")) == NULL)
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_WARNING, "Unable to create debug file %s\n", &argv[i][2]); */ }
+                    { EAS_Report(_EAS_SEVERITY_WARNING, "Unable to create debug file %s\n", &argv[i][2]); }
                 else
                     EAS_SetDebugFile(debugFile, EAS_TRUE);
                 break;
@@ -339,7 +343,7 @@ int main( int argc, char **argv )
                 polyphony = atoi(&argv[i][2]);
                 if (polyphony < 1)
                     polyphony = 1;
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "Polyphony set to %d\n", polyphony); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "Polyphony set to %d\n", polyphony); }
                 break;
             default:
                 break;
@@ -365,7 +369,7 @@ int main( int argc, char **argv )
     buffer = malloc((EAS_U32)bufferSize);
     if (!buffer)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "Error allocating memory for audio buffer\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "Error allocating memory for audio buffer\n"); }
         return EAS_FAILURE;
     }
 
@@ -373,7 +377,7 @@ int main( int argc, char **argv )
     polyphony = pLibConfig->maxVoices;
     if ((result = EAS_Init(&easData)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "EAS_Init returned %ld - aborting!\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "EAS_Init returned %ld - aborting!\n", result); }
         free(buffer);
         return result;
     }
@@ -384,10 +388,10 @@ int main( int argc, char **argv )
      */
     if (argc < 2)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "Playing '%s'\n", defaultTestFile); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "Playing '%s'\n", defaultTestFile); }
         if ((playResult = PlayFile(easData, defaultTestFile, NULL, pLibConfig, buffer, bufferSize)) != EAS_SUCCESS)
         {
-            { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Error %d playing file %s\n", playResult, defaultTestFile); */ }
+            { EAS_Report(_EAS_SEVERITY_ERROR, "Error %d playing file %s\n", playResult, defaultTestFile); }
         }
     }
     /* iterate through the list of files to be played */
@@ -399,10 +403,10 @@ int main( int argc, char **argv )
             if (argv[i][0] != '-')
             {
 
-                { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "Playing '%s'\n", argv[i]); */ }
+                { EAS_Report(_EAS_SEVERITY_INFO, "Playing '%s'\n", argv[i]); }
                 if ((playResult = PlayFile(easData, argv[i], outputFile, pLibConfig, buffer, bufferSize)) != EAS_SUCCESS)
                 {
-                    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_ERROR, "Error %d playing file %s\n", playResult, argv[i]); */ }
+                    { EAS_Report(_EAS_SEVERITY_ERROR, "Error %d playing file %s\n", playResult, argv[i]); }
                     break;
                 }
             }
@@ -412,7 +416,7 @@ int main( int argc, char **argv )
     /* shutdown the EAS library */
     if ((result = EAS_Shutdown(easData)) != EAS_SUCCESS)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "EAS_Shutdown returned %ld\n", result); */ }
+        { EAS_Report(_EAS_SEVERITY_FATAL, "EAS_Shutdown returned %ld\n", result); }
     }
 
     /* free the output buffer */
@@ -507,35 +511,35 @@ static EAS_BOOL EASLibraryCheck (const S_EAS_LIB_CONFIG *pLibConfig)
 {
 
     /* display the library version */
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "EAS Library Version %d.%d.%d.%d\n",
+    { EAS_Report(_EAS_SEVERITY_INFO, "EAS Library Version %d.%d.%d.%d\n",
         pLibConfig->libVersion >> 24,
         (pLibConfig->libVersion >> 16) & 0x0f,
         (pLibConfig->libVersion >> 8) & 0x0f,
-        pLibConfig->libVersion & 0x0f); */ }
+        pLibConfig->libVersion & 0x0f); }
 
     /* display some info about the library build */
     if (pLibConfig->checkedVersion)
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tChecked library\n"); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tMaximum polyphony: %d\n", pLibConfig->maxVoices); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tNumber of channels: %d\n", pLibConfig->numChannels); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tSample rate: %d\n", pLibConfig->sampleRate); */ }
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tMix buffer size: %d\n", pLibConfig->mixBufferSize); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "\tChecked library\n"); }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\tMaximum polyphony: %d\n", pLibConfig->maxVoices); }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\tNumber of channels: %d\n", pLibConfig->numChannels); }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\tSample rate: %d\n", pLibConfig->sampleRate); }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\tMix buffer size: %d\n", pLibConfig->mixBufferSize); }
     if (pLibConfig->filterEnabled)
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tFilter enabled\n"); */ }
+        { EAS_Report(_EAS_SEVERITY_INFO, "\tFilter enabled\n"); }
 #ifndef _WIN32_WCE
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tLibrary Build Timestamp: %s", ctime((time_t*)&pLibConfig->buildTimeStamp)); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\tLibrary Build Timestamp: %s\n", ctime((time_t*)&pLibConfig->buildTimeStamp)); }
 #endif
-    { /* dpp: EAS_ReportEx(_EAS_SEVERITY_INFO, "\tLibrary Build ID: %s\n", pLibConfig->buildGUID); */ }
+    { EAS_Report(_EAS_SEVERITY_INFO, "\tLibrary Build ID: %s\n", pLibConfig->buildGUID); }
 
     /* check it against the header file used to build this code */
     /*lint -e{778} constant expression used for display purposes may evaluate to zero */
     if (LIB_VERSION != pLibConfig->libVersion)
     {
-        { /* dpp: EAS_ReportEx(_EAS_SEVERITY_FATAL, "Library version does not match header files. EAS Header Version %d.%d.%d.%d\n",
+        { EAS_Report(_EAS_SEVERITY_FATAL, "Library version does not match header files. EAS Header Version %d.%d.%d.%d\n",
             LIB_VERSION >> 24,
             (LIB_VERSION >> 16) & 0x0f,
             (LIB_VERSION >> 8) & 0x0f,
-            LIB_VERSION & 0x0f); */ }
+            LIB_VERSION & 0x0f); }
         return EAS_FALSE;
     }
     return EAS_TRUE;
