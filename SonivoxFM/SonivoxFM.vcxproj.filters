@@ -29,228 +29,255 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="eas_config.c">
+    <ClCompile Include="..\Host\Src\eas_config.c">
       <Filter>Client\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_hostmm.c">
+    <ClCompile Include="..\Host\Src\eas_hostmm.c">
       <Filter>Client\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_main.c">
+    <ClCompile Include="..\Host\Src\eas_main.c">
       <Filter>Client\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_report.c">
+    <ClCompile Include="..\Host\Src\eas_report.c">
       <Filter>Client\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_wave.c">
+    <ClCompile Include="..\Host\Src\mylog.c">
       <Filter>Client\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_chorus.c">
+    <ClCompile Include="..\Common\Src\eas_chorus.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_chorusdata.c">
+    <ClCompile Include="..\Common\Src\eas_chorusdata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_data.c">
+    <ClCompile Include="..\Common\Src\eas_data.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_fmengine.c">
+    <ClCompile Include="..\Common\Src\eas_flog.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_fmsndlib.c">
+    <ClCompile Include="..\Common\Src\eas_math.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_fmsynth.c">
+    <ClCompile Include="..\Common\Src\eas_mixbuf.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_fmtables.c">
+    <ClCompile Include="..\Common\Src\eas_mixer.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_ima_tables.c">
+    <ClCompile Include="..\Common\Src\eas_pan.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_imaadpcm.c">
+    <ClCompile Include="..\Common\Src\eas_public.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_imelody.c">
+    <ClCompile Include="..\Common\Src\eas_reverb.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_imelodydata.c">
+    <ClCompile Include="..\Common\Src\eas_reverbdata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_math.c">
+    <ClCompile Include="..\Common\Src\eas_tcdata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_midi.c">
+    <ClCompile Include="..\Common\Src\eas_tonecontrol.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_mididata.c">
+    <ClCompile Include="..\Common\Src\eas_voicemgt.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_mixbuf.c">
+    <ClCompile Include="..\Format\Src\eas_ima_tables.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_mixer.c">
+    <ClCompile Include="..\Format\Src\eas_imaadpcm.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_ota.c">
+    <ClCompile Include="..\Format\Src\eas_imelody.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_otadata.c">
+    <ClCompile Include="..\Format\Src\eas_imelodydata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_pan.c">
+    <ClCompile Include="..\Format\Src\eas_midi.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_pcm.c">
+    <ClCompile Include="..\Format\Src\eas_mididata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_pcmdata.c">
+    <ClCompile Include="..\Format\Src\eas_ota.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_public.c">
+    <ClCompile Include="..\Format\Src\eas_otadata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_reverb.c">
+    <ClCompile Include="..\Format\Src\eas_pcm.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_reverbdata.c">
+    <ClCompile Include="..\Format\Src\eas_pcmdata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_rtttl.c">
+    <ClCompile Include="..\Format\Src\eas_rtttl.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_rtttldata.c">
+    <ClCompile Include="..\Format\Src\eas_rtttldata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_smf.c">
+    <ClCompile Include="..\Format\Src\eas_smf.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_smfdata.c">
+    <ClCompile Include="..\Format\Src\eas_smfdata.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_voicemgt.c">
+    <ClCompile Include="..\Format\Src\eas_wave.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_wavefile.c">
+    <ClCompile Include="..\Format\Src\eas_wavefile.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eas_wavefiledata.c">
+    <ClCompile Include="..\Format\Src\eas_wavefiledata.c">
+      <Filter>FM Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmengine.c">
+      <Filter>FM Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmsndlib.c">
+      <Filter>FM Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmsynth.c">
+      <Filter>FM Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmtables.c">
       <Filter>FM Library\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="eas.h">
+    <ClInclude Include="..\Host\Inc\eas.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_build.h">
+    <ClInclude Include="..\Host\Inc\eas_chorus.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_chorus.h">
+    <ClInclude Include="..\Host\Inc\eas_config.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_config.h">
+    <ClInclude Include="..\Host\Inc\eas_debugmsgs.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_debugmsgs.h">
+    <ClInclude Include="..\Host\Inc\eas_host.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_host.h">
+    <ClInclude Include="..\Host\Inc\eas_report.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_report.h">
+    <ClInclude Include="..\Host\Inc\eas_reverb.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_reverb.h">
+    <ClInclude Include="..\Host\Inc\eas_types.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_types.h">
+    <ClInclude Include="..\Host\Inc\mylog.h">
       <Filter>Client\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_wave.h">
-      <Filter>Client\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="eas_audioconst.h">
+    <ClInclude Include="..\Common\Inc\eas_audioconst.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_chorusdata.h">
+    <ClInclude Include="..\Common\Inc\eas_build.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_ctype.h">
+    <ClInclude Include="..\Common\Inc\eas_chorus.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_data.h">
+    <ClInclude Include="..\Common\Inc\eas_chorusdata.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_effects.h">
+    <ClInclude Include="..\Common\Inc\eas_ctype.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_fmengine.h">
+    <ClInclude Include="..\Common\Inc\eas_data.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_fmsynth.h">
+    <ClInclude Include="..\Common\Inc\eas_effects.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_imelodydata.h">
+    <ClInclude Include="..\Common\Inc\eas_math.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_math.h">
+    <ClInclude Include="..\Common\Inc\eas_mixer.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_midi.h">
+    <ClInclude Include="..\Common\Inc\eas_pan.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_midictrl.h">
+    <ClInclude Include="..\Common\Inc\eas_parser.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_miditypes.h">
+    <ClInclude Include="..\Common\Inc\eas_reverb.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_mixer.h">
+    <ClInclude Include="..\Common\Inc\eas_reverbdata.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_otadata.h">
+    <ClInclude Include="..\Common\Inc\eas_sndlib.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_pan.h">
+    <ClInclude Include="..\Common\Inc\eas_synth.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_parser.h">
+    <ClInclude Include="..\Common\Inc\eas_synth_protos.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_pcm.h">
+    <ClInclude Include="..\Common\Inc\eas_synthcfg.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_pcmdata.h">
+    <ClInclude Include="..\Common\Inc\eas_tcdata.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_reverbdata.h">
+    <ClInclude Include="..\Common\Inc\eas_vm_protos.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_rtttldata.h">
+    <ClInclude Include="..\Format\Inc\eas_imelodydata.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_smf.h">
+    <ClInclude Include="..\Format\Inc\eas_mdls.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_smfdata.h">
+    <ClInclude Include="..\Format\Inc\eas_midi.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_sndlib.h">
+    <ClInclude Include="..\Format\Inc\eas_midictrl.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_synth.h">
+    <ClInclude Include="..\Format\Inc\eas_miditypes.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_synth_protos.h">
+    <ClInclude Include="..\Format\Inc\eas_otadata.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_synthcfg.h">
+    <ClInclude Include="..\Format\Inc\eas_pcm.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_vm_protos.h">
+    <ClInclude Include="..\Format\Inc\eas_pcmdata.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="eas_wavefile.h">
+    <ClInclude Include="..\Format\Inc\eas_rtttldata.h">
+      <Filter>FM Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Format\Inc\eas_smf.h">
+      <Filter>FM Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Format\Inc\eas_smfdata.h">
+      <Filter>FM Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Format\Inc\eas_wave.h">
+      <Filter>FM Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Format\Inc\eas_wavefile.h">
+      <Filter>FM Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Synthesizer\FM\Inc\eas_fmengine.h">
+      <Filter>FM Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Synthesizer\FM\Inc\eas_fmsynth.h">
       <Filter>FM Library\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

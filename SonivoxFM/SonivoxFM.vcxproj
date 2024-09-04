@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,82 +19,91 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="eas_chorus.c" />
-    <ClCompile Include="eas_chorusdata.c" />
-    <ClCompile Include="eas_config.c" />
-    <ClCompile Include="eas_data.c" />
-    <ClCompile Include="eas_fmengine.c" />
-    <ClCompile Include="eas_fmsndlib.c" />
-    <ClCompile Include="eas_fmsynth.c" />
-    <ClCompile Include="eas_fmtables.c" />
-    <ClCompile Include="eas_hostmm.c" />
-    <ClCompile Include="eas_imaadpcm.c" />
-    <ClCompile Include="eas_ima_tables.c" />
-    <ClCompile Include="eas_imelody.c" />
-    <ClCompile Include="eas_imelodydata.c" />
-    <ClCompile Include="eas_main.c" />
-    <ClCompile Include="eas_math.c" />
-    <ClCompile Include="eas_midi.c" />
-    <ClCompile Include="eas_mididata.c" />
-    <ClCompile Include="eas_mixbuf.c" />
-    <ClCompile Include="eas_mixer.c" />
-    <ClCompile Include="eas_ota.c" />
-    <ClCompile Include="eas_otadata.c" />
-    <ClCompile Include="eas_pan.c" />
-    <ClCompile Include="eas_pcm.c" />
-    <ClCompile Include="eas_pcmdata.c" />
-    <ClCompile Include="eas_public.c" />
-    <ClCompile Include="eas_report.c" />
-    <ClCompile Include="eas_reverb.c" />
-    <ClCompile Include="eas_reverbdata.c" />
-    <ClCompile Include="eas_rtttl.c" />
-    <ClCompile Include="eas_rtttldata.c" />
-    <ClCompile Include="eas_smf.c" />
-    <ClCompile Include="eas_smfdata.c" />
-    <ClCompile Include="eas_voicemgt.c" />
-    <ClCompile Include="eas_wave.c" />
-    <ClCompile Include="eas_wavefile.c" />
-    <ClCompile Include="eas_wavefiledata.c" />
+    <ClCompile Include="..\Common\Src\eas_chorus.c" />
+    <ClCompile Include="..\Common\Src\eas_chorusdata.c" />
+    <ClCompile Include="..\Common\Src\eas_data.c" />
+    <ClCompile Include="..\Common\Src\eas_flog.c" />
+    <ClCompile Include="..\Common\Src\eas_math.c" />
+    <ClCompile Include="..\Common\Src\eas_mixbuf.c" />
+    <ClCompile Include="..\Common\Src\eas_mixer.c" />
+    <ClCompile Include="..\Common\Src\eas_pan.c" />
+    <ClCompile Include="..\Common\Src\eas_public.c" />
+    <ClCompile Include="..\Common\Src\eas_reverb.c" />
+    <ClCompile Include="..\Common\Src\eas_reverbdata.c" />
+    <ClCompile Include="..\Common\Src\eas_tcdata.c" />
+    <ClCompile Include="..\Common\Src\eas_tonecontrol.c" />
+    <ClCompile Include="..\Common\Src\eas_voicemgt.c" />
+    <ClCompile Include="..\Format\Src\eas_imaadpcm.c" />
+    <ClCompile Include="..\Format\Src\eas_ima_tables.c" />
+    <ClCompile Include="..\Format\Src\eas_imelody.c" />
+    <ClCompile Include="..\Format\Src\eas_imelodydata.c" />
+    <ClCompile Include="..\Format\Src\eas_midi.c" />
+    <ClCompile Include="..\Format\Src\eas_mididata.c" />
+    <ClCompile Include="..\Format\Src\eas_ota.c" />
+    <ClCompile Include="..\Format\Src\eas_otadata.c" />
+    <ClCompile Include="..\Format\Src\eas_pcm.c" />
+    <ClCompile Include="..\Format\Src\eas_pcmdata.c" />
+    <ClCompile Include="..\Format\Src\eas_rtttl.c" />
+    <ClCompile Include="..\Format\Src\eas_rtttldata.c" />
+    <ClCompile Include="..\Format\Src\eas_smf.c" />
+    <ClCompile Include="..\Format\Src\eas_smfdata.c" />
+    <ClCompile Include="..\Format\Src\eas_wave.c" />
+    <ClCompile Include="..\Format\Src\eas_wavefile.c" />
+    <ClCompile Include="..\Format\Src\eas_wavefiledata.c" />
+    <ClCompile Include="..\Host\Src\eas_config.c" />
+    <ClCompile Include="..\Host\Src\eas_hostmm.c" />
+    <ClCompile Include="..\Host\Src\eas_main.c" />
+    <ClCompile Include="..\Host\Src\eas_report.c" />
+    <ClCompile Include="..\Host\Src\mylog.c" />
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmengine.c" />
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmsndlib.c" />
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmsynth.c" />
+    <ClCompile Include="..\Synthesizer\FM\Src\eas_fmtables.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="eas.h" />
-    <ClInclude Include="eas_audioconst.h" />
-    <ClInclude Include="eas_build.h" />
-    <ClInclude Include="eas_chorus.h" />
-    <ClInclude Include="eas_chorusdata.h" />
-    <ClInclude Include="eas_config.h" />
-    <ClInclude Include="eas_ctype.h" />
-    <ClInclude Include="eas_data.h" />
-    <ClInclude Include="eas_debugmsgs.h" />
-    <ClInclude Include="eas_effects.h" />
-    <ClInclude Include="eas_fmengine.h" />
-    <ClInclude Include="eas_fmsynth.h" />
-    <ClInclude Include="eas_host.h" />
-    <ClInclude Include="eas_imelodydata.h" />
-    <ClInclude Include="eas_math.h" />
-    <ClInclude Include="eas_midi.h" />
-    <ClInclude Include="eas_midictrl.h" />
-    <ClInclude Include="eas_miditypes.h" />
-    <ClInclude Include="eas_mixer.h" />
-    <ClInclude Include="eas_otadata.h" />
-    <ClInclude Include="eas_pan.h" />
-    <ClInclude Include="eas_parser.h" />
-    <ClInclude Include="eas_pcm.h" />
-    <ClInclude Include="eas_pcmdata.h" />
-    <ClInclude Include="eas_report.h" />
-    <ClInclude Include="eas_reverb.h" />
-    <ClInclude Include="eas_reverbdata.h" />
-    <ClInclude Include="eas_rtttldata.h" />
-    <ClInclude Include="eas_smf.h" />
-    <ClInclude Include="eas_smfdata.h" />
-    <ClInclude Include="eas_sndlib.h" />
-    <ClInclude Include="eas_synth.h" />
-    <ClInclude Include="eas_synthcfg.h" />
-    <ClInclude Include="eas_synth_protos.h" />
-    <ClInclude Include="eas_types.h" />
-    <ClInclude Include="eas_vm_protos.h" />
-    <ClInclude Include="eas_wave.h" />
-    <ClInclude Include="eas_wavefile.h" />
+    <ClInclude Include="..\Common\Inc\eas_audioconst.h" />
+    <ClInclude Include="..\Common\Inc\eas_build.h" />
+    <ClInclude Include="..\Common\Inc\eas_chorus.h" />
+    <ClInclude Include="..\Common\Inc\eas_chorusdata.h" />
+    <ClInclude Include="..\Common\Inc\eas_ctype.h" />
+    <ClInclude Include="..\Common\Inc\eas_data.h" />
+    <ClInclude Include="..\Common\Inc\eas_effects.h" />
+    <ClInclude Include="..\Common\Inc\eas_math.h" />
+    <ClInclude Include="..\Common\Inc\eas_mixer.h" />
+    <ClInclude Include="..\Common\Inc\eas_pan.h" />
+    <ClInclude Include="..\Common\Inc\eas_parser.h" />
+    <ClInclude Include="..\Common\Inc\eas_reverb.h" />
+    <ClInclude Include="..\Common\Inc\eas_reverbdata.h" />
+    <ClInclude Include="..\Common\Inc\eas_sndlib.h" />
+    <ClInclude Include="..\Common\Inc\eas_synth.h" />
+    <ClInclude Include="..\Common\Inc\eas_synthcfg.h" />
+    <ClInclude Include="..\Common\Inc\eas_synth_protos.h" />
+    <ClInclude Include="..\Common\Inc\eas_tcdata.h" />
+    <ClInclude Include="..\Common\Inc\eas_vm_protos.h" />
+    <ClInclude Include="..\Format\Inc\eas_imelodydata.h" />
+    <ClInclude Include="..\Format\Inc\eas_mdls.h" />
+    <ClInclude Include="..\Format\Inc\eas_midi.h" />
+    <ClInclude Include="..\Format\Inc\eas_midictrl.h" />
+    <ClInclude Include="..\Format\Inc\eas_miditypes.h" />
+    <ClInclude Include="..\Format\Inc\eas_otadata.h" />
+    <ClInclude Include="..\Format\Inc\eas_pcm.h" />
+    <ClInclude Include="..\Format\Inc\eas_pcmdata.h" />
+    <ClInclude Include="..\Format\Inc\eas_rtttldata.h" />
+    <ClInclude Include="..\Format\Inc\eas_smf.h" />
+    <ClInclude Include="..\Format\Inc\eas_smfdata.h" />
+    <ClInclude Include="..\Format\Inc\eas_wave.h" />
+    <ClInclude Include="..\Format\Inc\eas_wavefile.h" />
+    <ClInclude Include="..\Host\Inc\eas.h" />
+    <ClInclude Include="..\Host\Inc\eas_chorus.h" />
+    <ClInclude Include="..\Host\Inc\eas_config.h" />
+    <ClInclude Include="..\Host\Inc\eas_debugmsgs.h" />
+    <ClInclude Include="..\Host\Inc\eas_host.h" />
+    <ClInclude Include="..\Host\Inc\eas_report.h" />
+    <ClInclude Include="..\Host\Inc\eas_reverb.h" />
+    <ClInclude Include="..\Host\Inc\eas_types.h" />
+    <ClInclude Include="..\Host\Inc\mylog.h" />
+    <ClInclude Include="..\Synthesizer\FM\Inc\eas_fmengine.h" />
+    <ClInclude Include="..\Synthesizer\FM\Inc\eas_fmsynth.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -150,15 +159,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)Common\Inc;$(SolutionDir)Format\Inc;$(SolutionDir)Synthesizer\FM\Inc;$(SolutionDir)Host\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)Common\Inc;$(SolutionDir)Format\Inc;$(SolutionDir)Synthesizer\FM\Inc;$(SolutionDir)Host\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)Common\Inc;$(SolutionDir)Format\Inc;$(SolutionDir)Synthesizer\FM\Inc;$(SolutionDir)Host\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)Common\Inc;$(SolutionDir)Format\Inc;$(SolutionDir)Synthesizer\FM\Inc;$(SolutionDir)Host\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -183,7 +196,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;EAS_FM_SYNTH;_SAMPLE_RATE_48000;NUM_OUTPUT_CHANNELS=2;MAX_SYNTH_VOICES=64;_FILTER_ENABLED;_WAVE_PARSER;MAX_SMF_STREAMS=32;_REVERB_DISABLED;_CHORUS_DISABLED;UNIFIED_DEBUG_MESSAGES;IMELODY_PARSER;_RTTTL_PARSER;_OTA_PARSER;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -220,7 +233,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;EAS_FM_SYNTH;_SAMPLE_RATE_48000;NUM_OUTPUT_CHANNELS=2;MAX_SYNTH_VOICES=64;_FILTER_ENABLED;_WAVE_PARSER;MAX_SMF_STREAMS=32;_REVERB_DISABLED;_CHORUS_DISABLED;UNIFIED_DEBUG_MESSAGES;IMELODY_PARSER;_RTTTL_PARSER;_OTA_PARSER;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
