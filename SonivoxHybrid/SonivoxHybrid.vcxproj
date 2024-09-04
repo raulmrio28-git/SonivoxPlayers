@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="eas_chorus.c" />
+    <ClCompile Include="eas_chorusdata.c" />
+    <ClCompile Include="eas_config.c" />
+    <ClCompile Include="eas_data.c" />
+    <ClCompile Include="eas_fmengine.c" />
+    <ClCompile Include="eas_fmsynth.c" />
+    <ClCompile Include="eas_fmtables.c" />
+    <ClCompile Include="eas_hostmm.c" />
+    <ClCompile Include="eas_imaadpcm.c" />
+    <ClCompile Include="eas_ima_tables.c" />
+    <ClCompile Include="eas_imelody.c" />
+    <ClCompile Include="eas_imelodydata.c" />
+    <ClCompile Include="eas_main.c" />
+    <ClCompile Include="eas_math.c" />
+    <ClCompile Include="eas_midi.c" />
+    <ClCompile Include="eas_mididata.c" />
+    <ClCompile Include="eas_mixbuf.c" />
+    <ClCompile Include="eas_mixer.c" />
+    <ClCompile Include="eas_ota.c" />
+    <ClCompile Include="eas_otadata.c" />
+    <ClCompile Include="eas_pan.c" />
+    <ClCompile Include="eas_pcm.c" />
+    <ClCompile Include="eas_pcmdata.c" />
+    <ClCompile Include="eas_public.c" />
+    <ClCompile Include="eas_report.c" />
+    <ClCompile Include="eas_reverb.c" />
+    <ClCompile Include="eas_reverbdata.c" />
+    <ClCompile Include="eas_rtttl.c" />
+    <ClCompile Include="eas_rtttldata.c" />
+    <ClCompile Include="eas_smf.c" />
+    <ClCompile Include="eas_smfdata.c" />
+    <ClCompile Include="eas_voicemgt.c" />
+    <ClCompile Include="eas_wave.c" />
+    <ClCompile Include="eas_wavefile.c" />
+    <ClCompile Include="eas_wavefiledata.c" />
+    <ClCompile Include="eas_wtengine.c" />
+    <ClCompile Include="eas_wtsynth.c" />
+    <ClCompile Include="hybrid_22khz_mcu.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="eas.h" />
+    <ClInclude Include="eas_audioconst.h" />
+    <ClInclude Include="eas_build.h" />
+    <ClInclude Include="eas_chorus.h" />
+    <ClInclude Include="eas_chorusdata.h" />
+    <ClInclude Include="eas_config.h" />
+    <ClInclude Include="eas_ctype.h" />
+    <ClInclude Include="eas_data.h" />
+    <ClInclude Include="eas_debugmsgs.h" />
+    <ClInclude Include="eas_effects.h" />
+    <ClInclude Include="eas_fmengine.h" />
+    <ClInclude Include="eas_fmsynth.h" />
+    <ClInclude Include="eas_host.h" />
+    <ClInclude Include="eas_imelodydata.h" />
+    <ClInclude Include="eas_math.h" />
+    <ClInclude Include="eas_midi.h" />
+    <ClInclude Include="eas_midictrl.h" />
+    <ClInclude Include="eas_miditypes.h" />
+    <ClInclude Include="eas_mixer.h" />
+    <ClInclude Include="eas_otadata.h" />
+    <ClInclude Include="eas_pan.h" />
+    <ClInclude Include="eas_parser.h" />
+    <ClInclude Include="eas_pcm.h" />
+    <ClInclude Include="eas_pcmdata.h" />
+    <ClInclude Include="eas_report.h" />
+    <ClInclude Include="eas_reverb.h" />
+    <ClInclude Include="eas_reverbdata.h" />
+    <ClInclude Include="eas_rtttldata.h" />
+    <ClInclude Include="eas_smf.h" />
+    <ClInclude Include="eas_smfdata.h" />
+    <ClInclude Include="eas_sndlib.h" />
+    <ClInclude Include="eas_synth.h" />
+    <ClInclude Include="eas_synthcfg.h" />
+    <ClInclude Include="eas_synth_protos.h" />
+    <ClInclude Include="eas_types.h" />
+    <ClInclude Include="eas_vm_protos.h" />
+    <ClInclude Include="eas_wave.h" />
+    <ClInclude Include="eas_wavefile.h" />
+    <ClInclude Include="eas_wtengine.h" />
+    <ClInclude Include="eas_wtsynth.h" />
+    <ClInclude Include="eas_wt_IPC_frame.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A29884DB-5ECE-4997-AE82-13BD614E7A92}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SonivoxHybrid</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;EAS_HYBRID_SYNTH;NUM_PRIMARY_VOICES=32;NUM_SECONDARY_VOICES=32;_8_BIT_SAMPLES;_SAMPLE_RATE_48000;NUM_OUTPUT_CHANNELS=1;MAX_SYNTH_VOICES=64;_FILTER_ENABLED;_WAVE_PARSER;MAX_SMF_STREAMS=32;_REVERB_DISABLED;_CHORUS_DISABLED;UNIFIED_DEBUG_MESSAGES;IMELODY_PARSER;_RTTTL_PARSER;_OTA_PARSER;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;EAS_HYBRID_SYNTH;NUM_PRIMARY_VOICES=32;NUM_SECONDARY_VOICES=32;_8_BIT_SAMPLES;_SAMPLE_RATE_48000;NUM_OUTPUT_CHANNELS=1;MAX_SYNTH_VOICES=64;_FILTER_ENABLED;_WAVE_PARSER;MAX_SMF_STREAMS=32;_REVERB_DISABLED;_CHORUS_DISABLED;UNIFIED_DEBUG_MESSAGES;IMELODY_PARSER;_RTTTL_PARSER;_OTA_PARSER;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

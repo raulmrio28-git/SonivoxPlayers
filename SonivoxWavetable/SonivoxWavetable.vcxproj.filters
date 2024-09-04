@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Wavetable Library">
+      <UniqueIdentifier>{4352e3bf-c0b9-45e1-85d1-f89159bf3dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{a25a5bfb-2bf9-4fb5-b571-279c7d203854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Client\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Wavetable Library\Header Files">
+      <UniqueIdentifier>{f822d099-2044-4e84-9454-cc961ced3b34}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Wavetable Library\Source Files">
+      <UniqueIdentifier>{a89919a8-b12a-4fb6-8e25-b80504da7d86}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="eas_build.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_chorus.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_config.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_debugmsgs.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_host.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_report.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_reverb.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_types.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wave.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dls.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dls2.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_audioconst.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_chorusdata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_ctype.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_data.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_dlssynth.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_effects.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_imelodydata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_math.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_mdls.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_midi.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_midictrl.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_miditypes.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_mixer.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_otadata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_pan.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_parser.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_pcm.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_pcmdata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_reverbdata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_rtttldata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_smf.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_smfdata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_sndlib.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_synth.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_synth_protos.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_synthcfg.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_tcdata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_vm_protos.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wavefile.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wt_IPC_frame.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wtengine.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wtsynth.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_xmf.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_xmfdata.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jet_data.h">
+      <Filter>Wavetable Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="eas_config.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_hostmm.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_main.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_report.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wave.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_chorus.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_chorusdata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_data.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_dlssynth.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_flog.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_ima_tables.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_imaadpcm.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_imelody.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_math.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_imelodydata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mdls.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mididata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_midi.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mixbuf.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mixer.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_ota.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_otadata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_pan.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_pcm.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_pcmdata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_public.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_reverbdata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_reverb.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_rtttldata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_rtttl.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_smf.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_smfdata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_tcdata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_tonecontrol.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wavefile.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_voicemgt.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wavefiledata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wtengine.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wtsynth.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_xmf.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_xmfdata.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wt_22khz.c">
+      <Filter>Wavetable Library\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

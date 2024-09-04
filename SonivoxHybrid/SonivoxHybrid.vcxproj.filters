@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Hybrid Library">
+      <UniqueIdentifier>{426c51ac-85fd-4597-a918-3810c35b9ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hybrid Library\Header Files">
+      <UniqueIdentifier>{be61fa7f-72e8-4ed1-8e28-b2c2750171c8}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Hybrid Library\Source Files">
+      <UniqueIdentifier>{476a4612-0258-4376-bfeb-795d6baed1c7}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{6bc85471-757f-45f0-a397-0801dab560a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\Header Files">
+      <UniqueIdentifier>{65a77eb0-f851-4e7d-aa2b-283736a0b1c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\Source Files">
+      <UniqueIdentifier>{a0956db8-ff77-4d79-9376-b3a8a471fd7e}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="eas_chorus.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_chorusdata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_data.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_fmengine.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_fmsynth.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_fmtables.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_ima_tables.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_imaadpcm.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_imelody.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_imelodydata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_math.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_midi.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mididata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mixbuf.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_mixer.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_ota.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_otadata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_pan.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_pcm.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_pcmdata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_public.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_reverb.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_reverbdata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_rtttl.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_rtttldata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_smf.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_smfdata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_voicemgt.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wavefile.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wavefiledata.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wtengine.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wtsynth.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hybrid_22khz_mcu.c">
+      <Filter>Hybrid Library\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_config.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_hostmm.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_main.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_report.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eas_wave.c">
+      <Filter>Client\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="eas_audioconst.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_chorusdata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_ctype.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_data.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_effects.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_fmengine.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_fmsynth.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_imelodydata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_math.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_midi.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_midictrl.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_miditypes.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_mixer.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_otadata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_pan.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_parser.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_pcm.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_pcmdata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_reverbdata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_rtttldata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_smf.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_smfdata.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_sndlib.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_synth.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_synth_protos.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_synthcfg.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_vm_protos.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wavefile.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wt_IPC_frame.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wtengine.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wtsynth.h">
+      <Filter>Hybrid Library\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_build.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_chorus.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_config.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_debugmsgs.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_host.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_report.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_reverb.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_types.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eas_wave.h">
+      <Filter>Client\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
